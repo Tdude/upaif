@@ -34,6 +34,7 @@ get_header();
 		<div class="upaif-content">
 			<h2 class="upaif-section-title"><span><?php esc_html_e( 'Nyheter', 'upaif' ); ?></span></h2>
 			<?php
+			$upaif_read_more_text = get_theme_mod( 'upaif_read_more_text', __( 'Read more', 'upaif' ) );
 			$upaif_news_query = new WP_Query(
 				array(
 					'post_type' => 'post',
@@ -50,7 +51,7 @@ get_header();
 					the_excerpt();
 					?>
 					<p>
-						<a class="upaif-btn upaif-btn--readmore" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Read more', 'upaif' ); ?></a>
+						<a class="upaif-btn upaif-btn--readmore" href="<?php the_permalink(); ?>"><?php echo esc_html( $upaif_read_more_text ); ?></a>
 					</p>
 					<?php
 				}

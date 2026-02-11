@@ -146,5 +146,21 @@ function upaif_customize_register( $wp_customize ) {
 			'type' => 'url',
 		)
 	);
+
+	$wp_customize->add_setting(
+		'upaif_read_more_text',
+		array(
+			'default' => __( 'Read more', 'upaif' ),
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_read_more_text',
+		array(
+			'label' => __( 'Read more button text', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'text',
+		)
+	);
 }
 add_action( 'customize_register', 'upaif_customize_register' );

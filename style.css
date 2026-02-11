@@ -111,6 +111,15 @@ a {
   color: #fff;
   padding: 12px 28px;
   border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 10px 30px rgba(155, 45, 48, 0.35);
+}
+
+.upaif-nav__cta a:hover {
+  background: #7f2427;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(155, 45, 48, 0.5);
 }
 
 .upaif-nav__icons {
