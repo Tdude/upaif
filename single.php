@@ -7,7 +7,7 @@ get_header();
 		<?php
 		while ( have_posts() ) {
 			the_post();
-			the_title( '<h1 class="upaif-section-title">', '</h1>' );
+			the_title( '<h1 class="upaif-section-title upaif-post-title">', '</h1>' );
 			the_content();
 		}
 		?>

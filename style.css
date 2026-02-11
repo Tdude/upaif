@@ -119,6 +119,11 @@ a {
   margin-left: 24px;
 }
 
+.upaif-nav__icons a.upaif-icon-box {
+  text-decoration: none;
+  color: inherit;
+}
+
 .upaif-icon-box {
   width: 58px;
   height: 58px;
@@ -154,6 +159,15 @@ a {
   text-align: center;
   padding: 0 20px;
   text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+}
+
+.upaif-hero--small {
+  min-height: 14vh;
+  padding-bottom: 7vh;
+}
+
+.upaif-hero--small .upaif-hero__content {
+  height: 8vh;
 }
 
 .upaif-hero__title {
@@ -235,6 +249,16 @@ a {
   display: block;
 }
 
+.upaif-post-title {
+  border-left: 0.5em solid var(--accent-red);
+  padding-left: 0.7em;
+}
+
+.upaif-btn--readmore {
+  font-size: 1.08rem;
+  padding: 14px 44px;
+}
+
 .upaif-btn {
   display: inline-block;
   background: var(--accent-red);
@@ -285,6 +309,7 @@ a {
   font-family: "Playfair Display", serif;
   font-size: clamp(3rem, 8vw, 5.5rem);
   margin-bottom: 2rem;
+  color: var(--accent-red);
 }
 
 .upaif-social {

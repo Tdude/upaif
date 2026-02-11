@@ -29,6 +29,38 @@ get_header();
 			<img class="upaif-section-img" src="https://images.unsplash.com/photo-1606890658317-7d14490b76fd?auto=format&fit=crop&q=80&w=800" alt="">
 		</div>
 	</section>
+
+	<section class="upaif-section">
+		<div class="upaif-content">
+			<h2 class="upaif-section-title"><span><?php esc_html_e( 'Nyheter', 'upaif' ); ?></span></h2>
+			<?php
+			$upaif_news_query = new WP_Query(
+				array(
+					'post_type' => 'post',
+					'posts_per_page' => 3,
+					'ignore_sticky_posts' => true,
+					'category_name' => 'nyheter',
+				)
+			);
+
+			if ( $upaif_news_query->have_posts() ) {
+				while ( $upaif_news_query->have_posts() ) {
+					$upaif_news_query->the_post();
+					the_title( '<h3 class="upaif-section-title upaif-post-title">', '</h3>' );
+					the_excerpt();
+					?>
+					<p>
+						<a class="upaif-btn upaif-btn--readmore" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Read more', 'upaif' ); ?></a>
+					</p>
+					<?php
+				}
+				wp_reset_postdata();
+			} else {
+				wp_reset_postdata();
+			}
+			?>
+		</div>
+	</section>
 </div>
 
 <?php

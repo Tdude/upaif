@@ -130,5 +130,21 @@ function upaif_customize_register( $wp_customize ) {
 			'type' => 'url',
 		)
 	);
+
+	$wp_customize->add_setting(
+		'upaif_contact_url',
+		array(
+			'default' => home_url( '/kontakt' ),
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_contact_url',
+		array(
+			'label' => __( 'Contact page URL', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'url',
+		)
+	);
 }
 add_action( 'customize_register', 'upaif_customize_register' );

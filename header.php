@@ -11,7 +11,25 @@
 <?php wp_body_open(); ?>
 
 <div class="upaif-site">
-	<header class="upaif-hero">
+	<?php
+	$upaif_is_front = is_front_page();
+	$upaif_header_title = '';
+	if ( ! $upaif_is_front ) {
+		if ( is_singular() ) {
+			$upaif_header_title = single_post_title( '', false );
+		} elseif ( is_home() ) {
+			$upaif_posts_page_id = (int) get_option( 'page_for_posts' );
+			$upaif_header_title = $upaif_posts_page_id ? get_the_title( $upaif_posts_page_id ) : __( 'Posts', 'upaif' );
+		} elseif ( is_archive() ) {
+			$upaif_header_title = get_the_archive_title();
+		} elseif ( is_search() ) {
+			$upaif_header_title = __( 'Search', 'upaif' );
+		} else {
+			$upaif_header_title = wp_get_document_title();
+		}
+	}
+	?>
+	<header class="upaif-hero<?php echo $upaif_is_front ? '' : ' upaif-hero--small'; ?>">
 		<div class="upaif-hero__bg"></div>
 
 		<nav class="upaif-nav" aria-label="<?php esc_attr_e( 'Primary', 'upaif' ); ?>">
@@ -30,22 +48,24 @@
 				<a href="<?php echo esc_url( home_url( '/klasser' ) ); ?>"><?php esc_html_e( 'Anmälan', 'upaif' ); ?></a>
 			</div>
 
-			<div class="upaif-nav__icons" aria-hidden="true">
-				<div class="upaif-icon-box">
+			<div class="upaif-nav__icons">
+				<a class="upaif-icon-box" href="<?php echo esc_url( get_theme_mod( 'upaif_footer_instagram_url', 'https://instagram.com' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Instagram', 'upaif' ); ?>">
 					<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.32-1.45 5.12-3.5h-10.25c.8 2.05 2.79 3.5 5.13 3.5z"/></svg>
-				</div>
-				<div class="upaif-icon-box">
+				</a>
+				<a class="upaif-icon-box" href="<?php echo esc_url( get_theme_mod( 'upaif_footer_facebook_url', 'https://facebook.com' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Facebook', 'upaif' ); ?>">
 					<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
-				</div>
-				<div class="upaif-icon-box">
-					<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-				</div>
+				</a>
+				<a class="upaif-icon-box" href="<?php echo esc_url( get_theme_mod( 'upaif_contact_url', home_url( '/kontakt' ) ) ); ?>" aria-label="<?php esc_attr_e( 'Contact', 'upaif' ); ?>">
+					<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+				</a>
 			</div>
 		</nav>
 
 		<div class="upaif-hero__content">
-			<h1 class="upaif-hero__title"><?php echo wp_kses_post( nl2br( esc_html( get_theme_mod( 'upaif_hero_title', "UPPSALA POLE\n& AERIALS" ) ) ) ); ?></h1>
-			<p class="upaif-hero__subtitle"><?php echo esc_html( get_theme_mod( 'upaif_hero_subtitle', 'Dans – Hållbarhet – Gemenskap' ) ); ?></p>
+			<?php if ( $upaif_is_front ) : ?>
+				<h1 class="upaif-hero__title"><?php echo wp_kses_post( nl2br( esc_html( get_theme_mod( 'upaif_hero_title', "UPPSALA POLE\n& AERIALS" ) ) ) ); ?></h1>
+				<p class="upaif-hero__subtitle"><?php echo esc_html( get_theme_mod( 'upaif_hero_subtitle', 'Dans – Hållbarhet – Gemenskap' ) ); ?></p>
+			<?php endif; ?>
 		</div>
 	</header>
 	
