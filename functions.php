@@ -34,6 +34,12 @@ function upaif_output_color_vars(): void {
 	$text_light = get_theme_mod( 'upaif_color_text_light', '#5c4033' );
 	$footer_bg = get_theme_mod( 'upaif_footer_bg_color', $accent_gold );
 	$footer_text = get_theme_mod( 'upaif_footer_text_color', $text_dark );
+	$header_sync_with_footer = absint( get_theme_mod( 'upaif_header_sync_with_footer', 1 ) );
+	$footer_sync_with_header = absint( get_theme_mod( 'upaif_footer_sync_with_header', 0 ) );
+	$header_bg_start = get_theme_mod( 'upaif_header_bg_start_color', '#e8d9c5' );
+	$header_bg_end = get_theme_mod( 'upaif_header_bg_end_color', '#d4c0a0' );
+	$header_overlay_mid = get_theme_mod( 'upaif_header_overlay_mid_color', '#e8d9c5' );
+	$header_overlay_end = get_theme_mod( 'upaif_header_overlay_end_color', '#d4c0a0' );
 	$hero_height = absint( get_theme_mod( 'upaif_hero_height_vh', 60 ) );
 	$hero_overlay_direction = (string) get_theme_mod( 'upaif_hero_overlay_direction', 'rtl' );
 	$hero_slant_deg = absint( get_theme_mod( 'upaif_hero_slant_deg', 20 ) );
@@ -50,6 +56,10 @@ function upaif_output_color_vars(): void {
 	$text_light = sanitize_hex_color( $text_light ) ?: '#5c4033';
 	$footer_bg = sanitize_hex_color( $footer_bg ) ?: $accent_gold;
 	$footer_text = sanitize_hex_color( $footer_text ) ?: $text_dark;
+	$header_bg_start = sanitize_hex_color( $header_bg_start ) ?: '#e8d9c5';
+	$header_bg_end = sanitize_hex_color( $header_bg_end ) ?: '#d4c0a0';
+	$header_overlay_mid = sanitize_hex_color( $header_overlay_mid ) ?: '#e8d9c5';
+	$header_overlay_end = sanitize_hex_color( $header_overlay_end ) ?: '#d4c0a0';
 
 	$hero_height = max( 30, min( 100, $hero_height ) );
 	$hero_slant_deg = max( 0, min( 30, $hero_slant_deg ) );
@@ -61,12 +71,45 @@ function upaif_output_color_vars(): void {
 	$hero_overlay_angle = $hero_overlay_direction === 'ltr' ? '270deg' : '90deg';
 	$hero_slant_pct = round( ( $hero_slant_deg / 30 ) * 18, 2 );
 
+	if ( $header_sync_with_footer ) {
+		$header_bg_start = $footer_bg;
+		$header_bg_end = $footer_bg;
+		$header_overlay_mid = $footer_bg;
+		$header_overlay_end = $footer_bg;
+	}
+
+	if ( $footer_sync_with_header ) {
+		$footer_bg = $header_bg_start;
+		$footer_text = $text_dark;
+	}
+
+	$header_overlay_mid_rgba = 'rgba(232,217,197,0.65)';
+	$header_overlay_end_rgba = 'rgba(212,192,160,0.98)';
+	if ( preg_match( '/^#([a-fA-F0-9]{6})$/', $header_overlay_mid, $m ) ) {
+		$hex = $m[1];
+		$r = hexdec( substr( $hex, 0, 2 ) );
+		$g = hexdec( substr( $hex, 2, 2 ) );
+		$b = hexdec( substr( $hex, 4, 2 ) );
+		$header_overlay_mid_rgba = 'rgba(' . $r . ',' . $g . ',' . $b . ',0.65)';
+	}
+	if ( preg_match( '/^#([a-fA-F0-9]{6})$/', $header_overlay_end, $m ) ) {
+		$hex = $m[1];
+		$r = hexdec( substr( $hex, 0, 2 ) );
+		$g = hexdec( substr( $hex, 2, 2 ) );
+		$b = hexdec( substr( $hex, 4, 2 ) );
+		$header_overlay_end_rgba = 'rgba(' . $r . ',' . $g . ',' . $b . ',0.98)';
+	}
+
 	$css = ':root{' .
 		'--bg-primary:' . $bg_primary . ';' .
 		'--accent-gold:' . $accent_gold . ';' .
 		'--accent-red:' . $accent_red . ';' .
 		'--text-dark:' . $text_dark . ';' .
 		'--text-light:' . $text_light . ';' .
+		'--header-bg-start:' . $header_bg_start . ';' .
+		'--header-bg-end:' . $header_bg_end . ';' .
+		'--header-overlay-mid:' . $header_overlay_mid_rgba . ';' .
+		'--header-overlay-end:' . $header_overlay_end_rgba . ';' .
 		'--footer-bg:' . $footer_bg . ';' .
 		'--footer-text:' . $footer_text . ';' .
 		'--hero-height:' . $hero_height . 'vh;' .
@@ -93,10 +136,18 @@ function upaif_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		'upaif_header',
+		array(
+			'title' => __( 'Header Settings', 'upaif' ),
+			'priority' => 31,
+		)
+	);
+
+	$wp_customize->add_section(
 		'upaif_footer',
 		array(
 			'title' => __( 'Footer Settings', 'upaif' ),
-			'priority' => 31,
+			'priority' => 32,
 		)
 	);
 
@@ -191,6 +242,94 @@ function upaif_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'upaif_header_sync_with_footer',
+		array(
+			'default' => 1,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_header_sync_with_footer',
+		array(
+			'label' => __( 'Sync header colors with footer', 'upaif' ),
+			'section' => 'upaif_header',
+			'type' => 'checkbox',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_header_bg_start_color',
+		array(
+			'default' => '#e8d9c5',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'upaif_header_bg_start_color',
+			array(
+				'label' => __( 'Header background (start)', 'upaif' ),
+				'section' => 'upaif_header',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_header_bg_end_color',
+		array(
+			'default' => '#d4c0a0',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'upaif_header_bg_end_color',
+			array(
+				'label' => __( 'Header background (end)', 'upaif' ),
+				'section' => 'upaif_header',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_header_overlay_mid_color',
+		array(
+			'default' => '#e8d9c5',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'upaif_header_overlay_mid_color',
+			array(
+				'label' => __( 'Header overlay (mid)', 'upaif' ),
+				'section' => 'upaif_header',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_header_overlay_end_color',
+		array(
+			'default' => '#d4c0a0',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'upaif_header_overlay_end_color',
+			array(
+				'label' => __( 'Header overlay (end)', 'upaif' ),
+				'section' => 'upaif_header',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
 		'upaif_hero_title',
 		array(
 			'default' => "UPPSALA POLE\n& AERIALS",
@@ -201,7 +340,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_title',
 		array(
 			'label' => __( 'Hero title', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'textarea',
 		)
 	);
@@ -217,7 +356,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_subtitle',
 		array(
 			'label' => __( 'Hero subtitle', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'text',
 		)
 	);
@@ -233,7 +372,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_height_vh',
 		array(
 			'label' => __( 'Hero height (vh)', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
 				'min' => 30,
@@ -254,7 +393,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_slant_deg',
 		array(
 			'label' => __( 'Hero slant angle (degrees)', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
 				'min' => 0,
@@ -275,7 +414,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_overlay_direction',
 		array(
 			'label' => __( 'Hero overlay fade direction', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'select',
 			'choices' => array(
 				'rtl' => __( 'Right to left', 'upaif' ),
@@ -295,7 +434,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_content_width_px',
 		array(
 			'label' => __( 'Hero content width (px)', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
 				'min' => 420,
@@ -316,7 +455,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_title_size_rem',
 		array(
 			'label' => __( 'Hero title size (rem)', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
 				'min' => 3,
@@ -337,7 +476,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_subtitle_size_rem',
 		array(
 			'label' => __( 'Hero tagline size (rem)', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
 				'min' => 1,
@@ -358,7 +497,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_hero_text_align',
 		array(
 			'label' => __( 'Hero text alignment', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'select',
 			'choices' => array(
 				'left' => __( 'Left', 'upaif' ),
@@ -381,6 +520,22 @@ function upaif_customize_register( $wp_customize ) {
 			'label' => __( 'Footer CTA title', 'upaif' ),
 			'section' => 'upaif_footer',
 			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_footer_sync_with_header',
+		array(
+			'default' => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_footer_sync_with_header',
+		array(
+			'label' => __( 'Sync footer colors with header', 'upaif' ),
+			'section' => 'upaif_footer',
+			'type' => 'checkbox',
 		)
 	);
 
@@ -537,7 +692,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_contact_url',
 		array(
 			'label' => __( 'Contact page URL', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'url',
 		)
 	);
@@ -553,7 +708,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_read_more_text',
 		array(
 			'label' => __( 'Read more button text', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'text',
 		)
 	);
@@ -569,7 +724,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_menu_cta_text',
 		array(
 			'label' => __( 'Menu button text', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'text',
 		)
 	);
@@ -585,7 +740,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_menu_cta_url',
 		array(
 			'label' => __( 'Menu button URL', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_header',
 			'type' => 'url',
 		)
 	);

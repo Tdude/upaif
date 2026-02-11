@@ -47,7 +47,7 @@ a {
 .upaif-hero {
   position: relative;
   min-height: var(--hero-height, 60vh);
-  background: linear-gradient(135deg, #e8d9c5 0%, #d4c0a0 100%);
+  background: linear-gradient(135deg, var(--header-bg-start, #e8d9c5) 0%, var(--header-bg-end, #d4c0a0) 100%);
   color: #fff;
   overflow: hidden;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - (var(--hero-slant-pct, 12) * 1%)));
@@ -79,8 +79,8 @@ a {
   background: linear-gradient(
     var(--hero-overlay-angle, 90deg),
     rgba(232, 217, 197, 0) 0%,
-    rgba(232, 217, 197, 0.65) 40%,
-    rgba(212, 192, 160, 0.98) 100%
+    var(--header-overlay-mid, rgba(232, 217, 197, 0.65)) 40%,
+    var(--header-overlay-end, rgba(212, 192, 160, 0.98)) 100%
   );
 }
 
