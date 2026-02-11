@@ -34,6 +34,13 @@ function upaif_output_color_vars(): void {
 	$text_light = get_theme_mod( 'upaif_color_text_light', '#5c4033' );
 	$footer_bg = get_theme_mod( 'upaif_footer_bg_color', $accent_gold );
 	$footer_text = get_theme_mod( 'upaif_footer_text_color', $text_dark );
+	$hero_height = absint( get_theme_mod( 'upaif_hero_height_vh', 60 ) );
+	$hero_overlay_direction = (string) get_theme_mod( 'upaif_hero_overlay_direction', 'rtl' );
+	$hero_content_width = absint( get_theme_mod( 'upaif_hero_content_width_px', 1100 ) );
+	$hero_title_size = (float) get_theme_mod( 'upaif_hero_title_size_rem', 6.2 );
+	$hero_subtitle_size = (float) get_theme_mod( 'upaif_hero_subtitle_size_rem', 2.2 );
+	$footer_title_width = absint( get_theme_mod( 'upaif_footer_title_width_px', 520 ) );
+	$footer_title_size = (float) get_theme_mod( 'upaif_footer_title_size_rem', 3.0 );
 
 	$bg_primary = sanitize_hex_color( $bg_primary ) ?: '#f5f0e6';
 	$accent_gold = sanitize_hex_color( $accent_gold ) ?: '#d4a373';
@@ -43,6 +50,14 @@ function upaif_output_color_vars(): void {
 	$footer_bg = sanitize_hex_color( $footer_bg ) ?: $accent_gold;
 	$footer_text = sanitize_hex_color( $footer_text ) ?: $text_dark;
 
+	$hero_height = max( 30, min( 100, $hero_height ) );
+	$hero_content_width = max( 420, min( 1600, $hero_content_width ) );
+	$hero_title_size = max( 3.0, min( 10.0, $hero_title_size ) );
+	$hero_subtitle_size = max( 1.0, min( 6.0, $hero_subtitle_size ) );
+	$footer_title_width = max( 320, min( 1200, $footer_title_width ) );
+	$footer_title_size = max( 1.6, min( 6.0, $footer_title_size ) );
+	$hero_overlay_angle = $hero_overlay_direction === 'ltr' ? '270deg' : '90deg';
+
 	$css = ':root{' .
 		'--bg-primary:' . $bg_primary . ';' .
 		'--accent-gold:' . $accent_gold . ';' .
@@ -51,6 +66,13 @@ function upaif_output_color_vars(): void {
 		'--text-light:' . $text_light . ';' .
 		'--footer-bg:' . $footer_bg . ';' .
 		'--footer-text:' . $footer_text . ';' .
+		'--hero-height:' . $hero_height . 'vh;' .
+		'--hero-overlay-angle:' . $hero_overlay_angle . ';' .
+		'--hero-content-width:' . $hero_content_width . 'px;' .
+		'--hero-title-size:' . $hero_title_size . 'rem;' .
+		'--hero-subtitle-size:' . $hero_subtitle_size . 'rem;' .
+		'--footer-title-width:' . $footer_title_width . 'px;' .
+		'--footer-title-size:' . $footer_title_size . 'rem;' .
 		'}';
 
 	wp_add_inline_style( 'upaif-style', $css );
@@ -197,6 +219,131 @@ function upaif_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'upaif_hero_height_vh',
+		array(
+			'default' => 60,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_height_vh',
+		array(
+			'label' => __( 'Hero height (vh)', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'range',
+			'input_attrs' => array(
+				'min' => 30,
+				'max' => 100,
+				'step' => 1,
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_hero_overlay_direction',
+		array(
+			'default' => 'rtl',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_overlay_direction',
+		array(
+			'label' => __( 'Hero overlay fade direction', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'select',
+			'choices' => array(
+				'rtl' => __( 'Right to left', 'upaif' ),
+				'ltr' => __( 'Left to right', 'upaif' ),
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_hero_content_width_px',
+		array(
+			'default' => 1100,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_content_width_px',
+		array(
+			'label' => __( 'Hero content width (px)', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'range',
+			'input_attrs' => array(
+				'min' => 420,
+				'max' => 1600,
+				'step' => 10,
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_hero_title_size_rem',
+		array(
+			'default' => 6.2,
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_title_size_rem',
+		array(
+			'label' => __( 'Hero title size (rem)', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'range',
+			'input_attrs' => array(
+				'min' => 3,
+				'max' => 10,
+				'step' => 0.1,
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_hero_subtitle_size_rem',
+		array(
+			'default' => 2.2,
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_subtitle_size_rem',
+		array(
+			'label' => __( 'Hero tagline size (rem)', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'range',
+			'input_attrs' => array(
+				'min' => 1,
+				'max' => 6,
+				'step' => 0.1,
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_hero_text_align',
+		array(
+			'default' => 'center',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_text_align',
+		array(
+			'label' => __( 'Hero text alignment', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'select',
+			'choices' => array(
+				'left' => __( 'Left', 'upaif' ),
+				'center' => __( 'Center', 'upaif' ),
+				'right' => __( 'Right', 'upaif' ),
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
 		'upaif_footer_cta_title',
 		array(
 			'default' => 'Intresserad av gruppevent?',
@@ -209,6 +356,48 @@ function upaif_customize_register( $wp_customize ) {
 			'label' => __( 'Footer CTA title', 'upaif' ),
 			'section' => 'upaif_footer',
 			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_footer_title_width_px',
+		array(
+			'default' => 520,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_footer_title_width_px',
+		array(
+			'label' => __( 'Footer text width (px)', 'upaif' ),
+			'section' => 'upaif_footer',
+			'type' => 'range',
+			'input_attrs' => array(
+				'min' => 320,
+				'max' => 1200,
+				'step' => 10,
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_footer_title_size_rem',
+		array(
+			'default' => 3.0,
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_footer_title_size_rem',
+		array(
+			'label' => __( 'Footer title size (rem)', 'upaif' ),
+			'section' => 'upaif_footer',
+			'type' => 'range',
+			'input_attrs' => array(
+				'min' => 1.6,
+				'max' => 6,
+				'step' => 0.1,
+			),
 		)
 	);
 

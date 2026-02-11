@@ -8,7 +8,7 @@
 
 :root {
   --bg-primary: #f5f0e6;
-  --accent-gold: #d4a373;
+  --accent-gold: #dbc3aa;
   --accent-red: #9b2d30;
   --text-dark: #2d1e12;
   --text-light: #5c4033;
@@ -46,7 +46,7 @@ a {
 
 .upaif-hero {
   position: relative;
-  min-height: 60vh;
+  min-height: var(--hero-height, 60vh);
   background: linear-gradient(135deg, #e8d9c5 0%, #d4c0a0 100%);
   color: #fff;
   overflow: hidden;
@@ -71,7 +71,7 @@ a {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    90deg,
+    var(--hero-overlay-angle, 90deg),
     rgba(232, 217, 197, 0) 0%,
     rgba(232, 217, 197, 0.65) 30%,
     rgba(212, 192, 160, 0.98) 100%
@@ -133,7 +133,7 @@ a {
 }
 
 .upaif-nav__cta a:hover {
-  background: #7f2427;
+  background: #bc8587;
   transform: translateY(-4px);
   box-shadow: 0 16px 48px rgba(155, 45, 48, 0.5);
 }
@@ -176,7 +176,9 @@ a {
 .upaif-hero__content {
   position: relative;
   z-index: 5;
-  height: 80vh;
+  height: var(--hero-height, 60vh);
+  max-width: var(--hero-content-width, 1100px);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -184,6 +186,16 @@ a {
   text-align: center;
   padding: 0 20px;
   text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+}
+
+.upaif-hero__content--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.upaif-hero__content--right {
+  align-items: flex-end;
+  text-align: right;
 }
 
 .upaif-hero--small {
@@ -197,7 +209,7 @@ a {
 
 .upaif-hero__title {
   font-family: "Playfair Display", serif;
-  font-size: clamp(4.2rem, 10vw, 10rem);
+  font-size: clamp(3rem, 10vw, var(--hero-title-size, 6.2rem));
   font-weight: 700;
   letter-spacing: -2px;
   line-height: 0.9;
@@ -205,7 +217,7 @@ a {
 }
 
 .upaif-hero__subtitle {
-  font-size: clamp(1.8rem, 4.5vw, 3.6rem);
+  font-size: clamp(1.2rem, 4.5vw, var(--hero-subtitle-size, 2.2rem));
   font-weight: 500;
   opacity: 0.96;
 }
@@ -336,7 +348,7 @@ a {
 
 .upaif-cta-title {
   font-family: "Playfair Display", serif;
-  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  font-size: clamp(2rem, 5.5vw, var(--footer-title-size, 3rem));
   margin: 0 0 1.2rem;
   color: var(--accent-red);
 }
@@ -351,6 +363,7 @@ a {
 .upaif-footer__left {
   flex: 1;
   min-width: 0;
+  max-width: var(--footer-title-width, 520px);
 }
 
 .upaif-footer__text {
@@ -369,8 +382,9 @@ a {
 }
 
 .upaif-social {
-  font-size: 1.4rem;
+  font-size: 4rem;
   margin: 0;
+  line-height: 1.4;
 }
 
 .upaif-social__icon {
@@ -392,8 +406,8 @@ a {
 }
 
 .upaif-social__icon svg {
-  width: 18px;
-  height: 18px;
+  width: 32px;
+  height: 32px;
   fill: var(--accent-red);
 }
 

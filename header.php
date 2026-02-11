@@ -75,7 +75,9 @@
 			<?php endif; ?>
 		</nav>
 
-		<div class="upaif-hero__content">
+		<?php $upaif_hero_text_align = (string) get_theme_mod( 'upaif_hero_text_align', 'center' ); ?>
+		<?php $upaif_hero_text_align = in_array( $upaif_hero_text_align, array( 'left', 'center', 'right' ), true ) ? $upaif_hero_text_align : 'center'; ?>
+		<div class="upaif-hero__content upaif-hero__content--<?php echo esc_attr( $upaif_hero_text_align ); ?>">
 			<?php if ( $upaif_is_front ) : ?>
 				<h1 class="upaif-hero__title"><?php echo wp_kses_post( nl2br( esc_html( get_theme_mod( 'upaif_hero_title', "UPPSALA POLE\n& AERIALS" ) ) ) ); ?></h1>
 				<p class="upaif-hero__subtitle"><?php echo esc_html( get_theme_mod( 'upaif_hero_subtitle', 'Dans – Hållbarhet – Gemenskap' ) ); ?></p>
