@@ -1,0 +1,327 @@
+/*
+ Theme Name: Uppsala Pole & Aerials
+ Text Domain: upaif
+ Author: Tibor Berki
+ Author URI: https://rugd.se
+ Version: 0.1.0
+*/
+
+:root {
+  --bg-primary: #f5f0e6;
+  --accent-gold: #d4a373;
+  --accent-red: #9b2d30;
+  --text-dark: #2d1e12;
+  --text-light: #5c4033;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+.upaif-site {
+  min-height: 100vh;
+}
+
+.upaif-hero {
+  position: relative;
+  min-height: 60vh;
+  background: linear-gradient(135deg, #e8d9c5 0%, #d4c0a0 100%);
+  color: #fff;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 88%);
+  padding-bottom: 12vh;
+}
+
+.upaif-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1519741497674-8b6947c5a348?auto=format&fit=crop&q=80&w=2000") center/cover no-repeat;
+  opacity: 0.18;
+  mix-blend-mode: luminosity;
+}
+
+.upaif-nav {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 14px 40px;
+  border-radius: 60px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.upaif-nav a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.08rem;
+  transition: color 0.25s;
+}
+
+.upaif-nav a:hover {
+  color: var(--accent-red);
+}
+
+.upaif-menu {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.upaif-menu li {
+  list-style: none;
+}
+
+.upaif-menu .current-menu-item > a,
+.upaif-menu .current_page_item > a {
+  color: var(--accent-red);
+}
+
+.upaif-nav__cta a {
+  background: var(--accent-red);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 50px;
+}
+
+.upaif-nav__icons {
+  display: flex;
+  gap: 22px;
+  margin-left: 24px;
+}
+
+.upaif-icon-box {
+  width: 58px;
+  height: 58px;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(155, 45, 48, 0.38), inset 0 1px 4px rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(0 5px 14px rgba(155, 45, 48, 0.45));
+  transition: all 0.25s ease;
+}
+
+.upaif-icon-box:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 12px 36px rgba(155, 45, 48, 0.55), inset 0 1px 4px rgba(255, 255, 255, 0.8);
+}
+
+.upaif-icon-box svg {
+  width: 34px;
+  height: 34px;
+  fill: var(--accent-red);
+}
+
+.upaif-hero__content {
+  position: relative;
+  z-index: 5;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+}
+
+.upaif-hero__title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(4.2rem, 10vw, 10rem);
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 0.9;
+  margin-bottom: 0.3rem;
+}
+
+.upaif-hero__subtitle {
+  font-size: clamp(1.8rem, 4.5vw, 3.6rem);
+  font-weight: 500;
+  opacity: 0.96;
+}
+
+.upaif-main {
+  padding: 140px 0 100px;
+  position: relative;
+  z-index: 2;
+  background: var(--bg-primary);
+}
+
+.upaif-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.upaif-section {
+  margin: 0 auto 160px;
+}
+
+.upaif-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 90px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .upaif-two-col {
+    grid-template-columns: 1fr;
+    gap: 70px;
+  }
+  .upaif-nav {
+    width: calc(100% - 24px);
+    padding: 12px 18px;
+    gap: 18px;
+  }
+  .upaif-menu {
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+  .upaif-nav__icons {
+    display: none;
+  }
+}
+
+.upaif-section-img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+
+.upaif-section-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  color: var(--accent-red);
+  margin-bottom: 1.5rem;
+  line-height: 1.08;
+}
+
+.upaif-section-title span {
+  color: var(--text-dark);
+  display: block;
+}
+
+.upaif-btn {
+  display: inline-block;
+  background: var(--accent-red);
+  color: #fff;
+  font-weight: 600;
+  padding: 16px 52px;
+  border-radius: 50px;
+  text-decoration: none;
+  margin-top: 2rem;
+  transition: all 0.3s;
+  box-shadow: 0 10px 30px rgba(155, 45, 48, 0.35);
+}
+
+.upaif-btn:hover {
+  background: #7f2427;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(155, 45, 48, 0.5);
+}
+
+.upaif-cta-diagonal {
+  position: relative;
+  background: linear-gradient(135deg, #2d1e12 0%, #3f2a1a 100%);
+  color: #fff;
+  padding: 140px 5vw 180px;
+  margin: 180px 0 0;
+  clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);
+  overflow: hidden;
+}
+
+.upaif-cta-diagonal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1519741497674-8b6947c5a348?auto=format&fit=crop&q=80") center/cover;
+  opacity: 0.11;
+  pointer-events: none;
+}
+
+.upaif-cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.upaif-cta-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  margin-bottom: 2rem;
+}
+
+.upaif-social {
+  font-size: 1.4rem;
+  margin: 2.5rem 0 1.5rem;
+}
+
+.upaif-social a {
+  color: #fff;
+  margin: 0 20px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.upaif-social a:hover {
+  color: var(--accent-gold);
+}
+
+.upaif-footer {
+  text-align: center;
+  padding: 60px 0 0;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  background: var(--bg-primary);
+}
+
+.upaif-footer a {
+  color: var(--accent-red);
+  text-decoration: none;
+}
+
+.upaif-content > * + * {
+  margin-top: 1rem;
+}
+
+.upaif-content h1,
+.upaif-content h2,
+.upaif-content h3 {
+  line-height: 1.2;
+}
