@@ -211,7 +211,7 @@ a {
 }
 
 .upaif-main {
-  padding: 140px 0 100px;
+  padding: 4rem 0 3rem;
   position: relative;
   z-index: 2;
   background: var(--bg-primary);
@@ -344,6 +344,30 @@ a {
 .upaif-social {
   font-size: 1.4rem;
   margin: 2.5rem 0 1.5rem;
+}
+
+.upaif-social__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22), inset 0 1px 4px rgba(255, 255, 255, 0.7);
+  margin: 0 12px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.upaif-social__icon:hover {
+  transform: translateY(-4px) scale(1.06);
+}
+
+.upaif-social__icon svg {
+  width: 34px;
+  height: 34px;
+  fill: var(--accent-red);
 }
 
 .upaif-social a {
