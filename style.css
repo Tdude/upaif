@@ -57,9 +57,25 @@ a {
 .upaif-hero__bg {
   position: absolute;
   inset: 0;
-  background: url("https://images.unsplash.com/photo-1519741497674-8b6947c5a348?auto=format&fit=crop&q=80&w=2000") center/cover no-repeat;
-  opacity: 0.18;
-  mix-blend-mode: luminosity;
+  left: 0;
+  right: auto;
+  width: 55%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 82%);
+  opacity: 1;
+}
+
+.upaif-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(232, 217, 197, 0) 0%,
+    rgba(232, 217, 197, 0.65) 30%,
+    rgba(212, 192, 160, 0.98) 100%
+  );
 }
 
 .upaif-nav {
@@ -223,6 +239,10 @@ a {
     grid-template-columns: 1fr;
     gap: 70px;
   }
+  .upaif-hero__bg {
+    width: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 88%);
+  }
   .upaif-nav {
     width: calc(100% - 24px);
     padding: 12px 18px;
@@ -370,7 +390,7 @@ a {
   color: inherit;
   margin: 0 0 2rem;
 }
-
+/*
 .upaif-news-card__inner {
   padding: 22px 22px 18px;
   border-radius: 16px;
@@ -390,6 +410,7 @@ a {
   outline-offset: 6px;
   border-radius: 16px;
 }
+*/
 
 .wpcf7 {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;

@@ -29,8 +29,19 @@
 		}
 	}
 	?>
+	<?php
+	$upaif_hero_image_url = '';
+	$upaif_thumbnail_id = get_post_thumbnail_id( get_queried_object_id() );
+	if ( $upaif_thumbnail_id ) {
+		$upaif_hero_image_url = (string) wp_get_attachment_image_url( $upaif_thumbnail_id, 'full' );
+	}
+	if ( ! $upaif_hero_image_url ) {
+		$upaif_hero_image_url = 'https://images.unsplash.com/photo-1519741497674-8b6947c5a348?auto=format&fit=crop&q=80&w=2000';
+	}
+	?>
 	<header class="upaif-hero<?php echo $upaif_is_front ? '' : ' upaif-hero--small'; ?>">
-		<div class="upaif-hero__bg"></div>
+		<div class="upaif-hero__bg" style="background-image: url('<?php echo esc_url( $upaif_hero_image_url ); ?>');"></div>
+		<div class="upaif-hero__overlay" aria-hidden="true"></div>
 
 		<nav class="upaif-nav" aria-label="<?php esc_attr_e( 'Primary', 'upaif' ); ?>">
 			<?php
