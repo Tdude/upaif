@@ -60,6 +60,14 @@ function upaif_customize_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_section(
+		'upaif_footer',
+		array(
+			'title' => __( 'Footer Settings', 'upaif' ),
+			'priority' => 31,
+		)
+	);
+
 	$wp_customize->add_setting(
 		'upaif_color_bg_primary',
 		array(
@@ -193,8 +201,24 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_footer_cta_title',
 		array(
 			'label' => __( 'Footer CTA title', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_footer',
 			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_footer_text',
+		array(
+			'default' => '',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_footer_text',
+		array(
+			'label' => __( 'Footer text', 'upaif' ),
+			'section' => 'upaif_footer',
+			'type' => 'textarea',
 		)
 	);
 
@@ -209,7 +233,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_footer_email',
 		array(
 			'label' => __( 'Footer email', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_footer',
 			'type' => 'text',
 		)
 	);
@@ -225,7 +249,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_footer_instagram_url',
 		array(
 			'label' => __( 'Instagram URL', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_footer',
 			'type' => 'url',
 		)
 	);
@@ -241,7 +265,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_footer_facebook_url',
 		array(
 			'label' => __( 'Facebook URL', 'upaif' ),
-			'section' => 'upaif_theme',
+			'section' => 'upaif_footer',
 			'type' => 'url',
 		)
 	);

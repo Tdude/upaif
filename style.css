@@ -309,9 +309,9 @@ a {
 
 .upaif-cta-diagonal {
   position: relative;
-  background: linear-gradient(135deg, #2d1e12 0%, #3f2a1a 100%);
-  color: #fff;
-  padding: 140px 5vw 180px;
+  background: var(--accent-gold);
+  color: var(--text-dark);
+  padding: 120px 5vw 120px;
   margin: 180px 0 0;
   clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);
   overflow: hidden;
@@ -322,51 +322,78 @@ a {
   position: absolute;
   inset: 0;
   background: url("https://images.unsplash.com/photo-1519741497674-8b6947c5a348?auto=format&fit=crop&q=80") center/cover;
-  opacity: 0.11;
+  opacity: 0.06;
   pointer-events: none;
 }
 
 .upaif-cta-content {
   position: relative;
   z-index: 2;
-  max-width: 800px;
+  max-width: 1040px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .upaif-cta-title {
   font-family: "Playfair Display", serif;
-  font-size: clamp(3rem, 8vw, 5.5rem);
-  margin-bottom: 2rem;
+  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  margin: 0 0 1.2rem;
   color: var(--accent-red);
+}
+
+.upaif-footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.upaif-footer__left {
+  flex: 1;
+  min-width: 0;
+}
+
+.upaif-footer__text {
+  margin: 0 0 1rem;
+  max-width: 520px;
+}
+
+.upaif-footer__email {
+  margin: 0;
+}
+
+.upaif-footer__right {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .upaif-social {
   font-size: 1.4rem;
-  margin: 2.5rem 0 1.5rem;
+  margin: 0;
 }
 
 .upaif-social__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22), inset 0 1px 4px rgba(255, 255, 255, 0.7);
-  margin: 0 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.0);
+  box-shadow: none;
+  margin: 0 0 0 12px;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
 .upaif-social__icon:hover {
-  transform: translateY(-4px) scale(1.06);
+  transform: translateY(-2px) scale(1.06);
 }
 
 .upaif-social__icon svg {
-  width: 34px;
-  height: 34px;
+  width: 18px;
+  height: 18px;
   fill: var(--accent-red);
 }
 
@@ -389,8 +416,20 @@ a {
   background: var(--bg-primary);
 }
 
+.upaif-footer__legal {
+  margin: 0;
+  padding: 26px 5vw 34px;
+  background: var(--accent-gold);
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.upaif-footer__legal a {
+  color: var(--text-dark);
+}
+
 .upaif-footer a {
-  color: var(--accent-red);
+  color: var(--text-dark);
   text-decoration: none;
 }
 
