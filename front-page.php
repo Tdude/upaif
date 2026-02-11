@@ -47,12 +47,18 @@ get_header();
 			if ( $upaif_news_query->have_posts() ) {
 				while ( $upaif_news_query->have_posts() ) {
 					$upaif_news_query->the_post();
-					the_title( '<h3 class="upaif-section-title upaif-post-title">', '</h3>' );
-					the_excerpt();
 					?>
-					<p>
-						<a class="upaif-btn upaif-btn--readmore" href="<?php the_permalink(); ?>"><?php echo esc_html( $upaif_read_more_text ); ?></a>
-					</p>
+					<a class="upaif-news-card" href="<?php the_permalink(); ?>">
+						<div class="upaif-news-card__inner">
+							<?php
+							the_title( '<h3 class="upaif-section-title upaif-post-title">', '</h3>' );
+							the_excerpt();
+							?>
+							<p>
+								<span class="upaif-btn upaif-btn--readmore"><?php echo esc_html( $upaif_read_more_text ); ?></span>
+							</p>
+						</div>
+					</a>
 					<?php
 				}
 				wp_reset_postdata();
