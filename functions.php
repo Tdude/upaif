@@ -41,6 +41,7 @@ function upaif_output_color_vars(): void {
 	$hero_height = absint( get_theme_mod( 'upaif_hero_height_vh', 60 ) );
 	$hero_overlay_direction = (string) get_theme_mod( 'upaif_hero_overlay_direction', 'rtl' );
 	$hero_slant_deg = absint( get_theme_mod( 'upaif_hero_slant_deg', 20 ) );
+	$footer_slant_deg = absint( get_theme_mod( 'upaif_footer_slant_deg', 20 ) );
 	$hero_content_width = absint( get_theme_mod( 'upaif_hero_content_width_px', 1100 ) );
 	$hero_title_size = (float) get_theme_mod( 'upaif_hero_title_size_rem', 6.2 );
 	$hero_subtitle_size = (float) get_theme_mod( 'upaif_hero_subtitle_size_rem', 2.2 );
@@ -59,6 +60,7 @@ function upaif_output_color_vars(): void {
 
 	$hero_height = max( 30, min( 100, $hero_height ) );
 	$hero_slant_deg = max( 0, min( 30, $hero_slant_deg ) );
+	$footer_slant_deg = max( 0, min( 30, $footer_slant_deg ) );
 	$hero_content_width = max( 420, min( 1600, $hero_content_width ) );
 	$hero_title_size = max( 3.0, min( 10.0, $hero_title_size ) );
 	$hero_subtitle_size = max( 1.0, min( 6.0, $hero_subtitle_size ) );
@@ -66,6 +68,7 @@ function upaif_output_color_vars(): void {
 	$footer_title_size = max( 1.6, min( 6.0, $footer_title_size ) );
 	$hero_overlay_angle = $hero_overlay_direction === 'ltr' ? '270deg' : '90deg';
 	$hero_slant_pct = round( ( $hero_slant_deg / 30 ) * 18, 2 );
+	$footer_slant_pct = round( ( $footer_slant_deg / 30 ) * 18, 2 );
 
 	if ( $header_sync_with_footer ) {
 		$header_bg_start = $footer_bg;
@@ -109,6 +112,7 @@ function upaif_output_color_vars(): void {
 		'--hero-height:' . $hero_height . 'vh;' .
 		'--hero-overlay-angle:' . $hero_overlay_angle . ';' .
 		'--hero-slant-pct:' . $hero_slant_pct . ';' .
+		'--footer-slant-pct:' . $footer_slant_pct . ';' .
 		'--hero-content-width:' . $hero_content_width . 'px;' .
 		'--hero-title-size:' . $hero_title_size . 'rem;' .
 		'--hero-subtitle-size:' . $hero_subtitle_size . 'rem;' .
@@ -478,6 +482,27 @@ function upaif_customize_register( $wp_customize ) {
 			'label' => __( 'Footer CTA title', 'upaif' ),
 			'section' => 'upaif_footer',
 			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_footer_slant_deg',
+		array(
+			'default' => 20,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_footer_slant_deg',
+		array(
+			'label' => __( 'Footer slant angle (degrees)', 'upaif' ),
+			'section' => 'upaif_footer',
+			'type' => 'range',
+			'input_attrs' => array(
+				'min' => 0,
+				'max' => 30,
+				'step' => 1,
+			),
 		)
 	);
 
