@@ -162,5 +162,37 @@ function upaif_customize_register( $wp_customize ) {
 			'type' => 'text',
 		)
 	);
+
+	$wp_customize->add_setting(
+		'upaif_menu_cta_text',
+		array(
+			'default' => __( 'Anmälan', 'upaif' ),
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_menu_cta_text',
+		array(
+			'label' => __( 'Menu button text', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_menu_cta_url',
+		array(
+			'default' => home_url( '/klasser' ),
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_menu_cta_url',
+		array(
+			'label' => __( 'Menu button URL', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'url',
+		)
+	);
 }
 add_action( 'customize_register', 'upaif_customize_register' );

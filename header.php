@@ -45,7 +45,11 @@
 			?>
 
 			<div class="upaif-nav__cta">
-				<a href="<?php echo esc_url( home_url( '/klasser' ) ); ?>"><?php esc_html_e( 'Anmälan', 'upaif' ); ?></a>
+				<?php
+				$upaif_menu_cta_url = get_theme_mod( 'upaif_menu_cta_url', home_url( '/klasser' ) );
+				$upaif_menu_cta_text = get_theme_mod( 'upaif_menu_cta_text', __( 'Anmälan', 'upaif' ) );
+				?>
+				<a href="<?php echo esc_url( $upaif_menu_cta_url ); ?>"><?php echo esc_html( $upaif_menu_cta_text ); ?></a>
 			</div>
 
 			<?php
