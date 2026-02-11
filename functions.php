@@ -38,8 +38,6 @@ function upaif_output_color_vars(): void {
 	$footer_sync_with_header = absint( get_theme_mod( 'upaif_footer_sync_with_header', 0 ) );
 	$header_bg_start = get_theme_mod( 'upaif_header_bg_start_color', '#e8d9c5' );
 	$header_bg_end = get_theme_mod( 'upaif_header_bg_end_color', '#d4c0a0' );
-	$header_overlay_mid = get_theme_mod( 'upaif_header_overlay_mid_color', '#e8d9c5' );
-	$header_overlay_end = get_theme_mod( 'upaif_header_overlay_end_color', '#d4c0a0' );
 	$hero_height = absint( get_theme_mod( 'upaif_hero_height_vh', 60 ) );
 	$hero_overlay_direction = (string) get_theme_mod( 'upaif_hero_overlay_direction', 'rtl' );
 	$hero_slant_deg = absint( get_theme_mod( 'upaif_hero_slant_deg', 20 ) );
@@ -58,8 +56,6 @@ function upaif_output_color_vars(): void {
 	$footer_text = sanitize_hex_color( $footer_text ) ?: $text_dark;
 	$header_bg_start = sanitize_hex_color( $header_bg_start ) ?: '#e8d9c5';
 	$header_bg_end = sanitize_hex_color( $header_bg_end ) ?: '#d4c0a0';
-	$header_overlay_mid = sanitize_hex_color( $header_overlay_mid ) ?: '#e8d9c5';
-	$header_overlay_end = sanitize_hex_color( $header_overlay_end ) ?: '#d4c0a0';
 
 	$hero_height = max( 30, min( 100, $hero_height ) );
 	$hero_slant_deg = max( 0, min( 30, $hero_slant_deg ) );
@@ -74,8 +70,6 @@ function upaif_output_color_vars(): void {
 	if ( $header_sync_with_footer ) {
 		$header_bg_start = $footer_bg;
 		$header_bg_end = $footer_bg;
-		$header_overlay_mid = $footer_bg;
-		$header_overlay_end = $footer_bg;
 	}
 
 	if ( $footer_sync_with_header ) {
@@ -85,14 +79,14 @@ function upaif_output_color_vars(): void {
 
 	$header_overlay_mid_rgba = 'rgba(232,217,197,0.65)';
 	$header_overlay_end_rgba = 'rgba(212,192,160,0.98)';
-	if ( preg_match( '/^#([a-fA-F0-9]{6})$/', $header_overlay_mid, $m ) ) {
+	if ( preg_match( '/^#([a-fA-F0-9]{6})$/', $header_bg_start, $m ) ) {
 		$hex = $m[1];
 		$r = hexdec( substr( $hex, 0, 2 ) );
 		$g = hexdec( substr( $hex, 2, 2 ) );
 		$b = hexdec( substr( $hex, 4, 2 ) );
 		$header_overlay_mid_rgba = 'rgba(' . $r . ',' . $g . ',' . $b . ',0.65)';
 	}
-	if ( preg_match( '/^#([a-fA-F0-9]{6})$/', $header_overlay_end, $m ) ) {
+	if ( preg_match( '/^#([a-fA-F0-9]{6})$/', $header_bg_end, $m ) ) {
 		$hex = $m[1];
 		$r = hexdec( substr( $hex, 0, 2 ) );
 		$g = hexdec( substr( $hex, 2, 2 ) );
@@ -288,42 +282,6 @@ function upaif_customize_register( $wp_customize ) {
 			'upaif_header_bg_end_color',
 			array(
 				'label' => __( 'Header background (end)', 'upaif' ),
-				'section' => 'upaif_header',
-			)
-		)
-	);
-
-	$wp_customize->add_setting(
-		'upaif_header_overlay_mid_color',
-		array(
-			'default' => '#e8d9c5',
-			'sanitize_callback' => 'sanitize_hex_color',
-		)
-	);
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'upaif_header_overlay_mid_color',
-			array(
-				'label' => __( 'Header overlay (mid)', 'upaif' ),
-				'section' => 'upaif_header',
-			)
-		)
-	);
-
-	$wp_customize->add_setting(
-		'upaif_header_overlay_end_color',
-		array(
-			'default' => '#d4c0a0',
-			'sanitize_callback' => 'sanitize_hex_color',
-		)
-	);
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'upaif_header_overlay_end_color',
-			array(
-				'label' => __( 'Header overlay (end)', 'upaif' ),
 				'section' => 'upaif_header',
 			)
 		)
