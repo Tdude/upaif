@@ -331,7 +331,7 @@ a {
   color: var(--footer-text, var(--text-dark));
   padding: 120px 5vw 120px;
   margin: 180px 0 0;
-  clip-path: polygon(0 calc(var(--footer-slant-pct, 18) * 1%), 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 calc(var(--footer-slant-pct, 18) * 1%), 50% 0, 100% calc(var(--footer-slant-pct, 18) * 1%), 100% 100%, 0 100%);
   overflow: hidden;
 }
 
