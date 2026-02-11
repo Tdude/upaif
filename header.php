@@ -44,9 +44,8 @@
 		</nav>
 
 		<div class="upaif-hero__content">
-			<h1 class="upaif-hero__title"><?php echo wp_kses_post( nl2br( esc_html__( 'UPPSALA POLE
-& AERIALS', 'upaif' ) ) ); ?></h1>
-			<p class="upaif-hero__subtitle"><?php esc_html_e( 'Dans – Hållbarhet – Gemenskap', 'upaif' ); ?></p>
+			<h1 class="upaif-hero__title"><?php echo wp_kses_post( nl2br( esc_html( get_theme_mod( 'upaif_hero_title', "UPPSALA POLE\n& AERIALS" ) ) ) ); ?></h1>
+			<p class="upaif-hero__subtitle"><?php echo esc_html( get_theme_mod( 'upaif_hero_subtitle', 'Dans – Hållbarhet – Gemenskap' ) ); ?></p>
 		</div>
 	</header>
 	
