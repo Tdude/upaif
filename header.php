@@ -39,7 +39,10 @@
 		$upaif_hero_image_url = 'https://images.unsplash.com/photo-1519741497674-8b6947c5a348?auto=format&fit=crop&q=80&w=2000';
 	}
 	?>
-	<header class="upaif-hero<?php echo $upaif_is_front ? '' : ' upaif-hero--small'; ?>">
+	<?php $upaif_hero_overlay_direction = (string) get_theme_mod( 'upaif_hero_overlay_direction', 'rtl' ); ?>
+	<?php $upaif_hero_overlay_direction = in_array( $upaif_hero_overlay_direction, array( 'rtl', 'ltr' ), true ) ? $upaif_hero_overlay_direction : 'rtl'; ?>
+	<?php $upaif_hero_image_side_class = $upaif_hero_overlay_direction === 'ltr' ? ' upaif-hero--image-right' : ' upaif-hero--image-left'; ?>
+	<header class="upaif-hero<?php echo $upaif_is_front ? '' : ' upaif-hero--small'; ?><?php echo esc_attr( $upaif_hero_image_side_class ); ?>">
 		<div class="upaif-hero__bg" style="background-image: url('<?php echo esc_url( $upaif_hero_image_url ); ?>');"></div>
 		<div class="upaif-hero__overlay" aria-hidden="true"></div>
 
