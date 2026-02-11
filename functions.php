@@ -32,12 +32,16 @@ function upaif_output_color_vars(): void {
 	$accent_red = get_theme_mod( 'upaif_color_accent_red', '#9b2d30' );
 	$text_dark = get_theme_mod( 'upaif_color_text_dark', '#2d1e12' );
 	$text_light = get_theme_mod( 'upaif_color_text_light', '#5c4033' );
+	$footer_bg = get_theme_mod( 'upaif_footer_bg_color', $accent_gold );
+	$footer_text = get_theme_mod( 'upaif_footer_text_color', $text_dark );
 
 	$bg_primary = sanitize_hex_color( $bg_primary ) ?: '#f5f0e6';
 	$accent_gold = sanitize_hex_color( $accent_gold ) ?: '#d4a373';
 	$accent_red = sanitize_hex_color( $accent_red ) ?: '#9b2d30';
 	$text_dark = sanitize_hex_color( $text_dark ) ?: '#2d1e12';
 	$text_light = sanitize_hex_color( $text_light ) ?: '#5c4033';
+	$footer_bg = sanitize_hex_color( $footer_bg ) ?: $accent_gold;
+	$footer_text = sanitize_hex_color( $footer_text ) ?: $text_dark;
 
 	$css = ':root{' .
 		'--bg-primary:' . $bg_primary . ';' .
@@ -45,6 +49,8 @@ function upaif_output_color_vars(): void {
 		'--accent-red:' . $accent_red . ';' .
 		'--text-dark:' . $text_dark . ';' .
 		'--text-light:' . $text_light . ';' .
+		'--footer-bg:' . $footer_bg . ';' .
+		'--footer-text:' . $footer_text . ';' .
 		'}';
 
 	wp_add_inline_style( 'upaif-style', $css );
@@ -203,6 +209,42 @@ function upaif_customize_register( $wp_customize ) {
 			'label' => __( 'Footer CTA title', 'upaif' ),
 			'section' => 'upaif_footer',
 			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_footer_bg_color',
+		array(
+			'default' => '#d4a373',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'upaif_footer_bg_color',
+			array(
+				'label' => __( 'Footer background', 'upaif' ),
+				'section' => 'upaif_footer',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_footer_text_color',
+		array(
+			'default' => '#2d1e12',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'upaif_footer_text_color',
+			array(
+				'label' => __( 'Footer text color', 'upaif' ),
+				'section' => 'upaif_footer',
+			)
 		)
 	);
 
