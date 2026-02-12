@@ -71,6 +71,8 @@ function upaif_output_color_vars(): void {
 	$footer_slant_pct = round( ( abs( $footer_slant_deg ) / 30 ) * 18, 2 );
 	$footer_slant_left_pct = $footer_slant_deg < 0 ? $footer_slant_pct : 0;
 	$footer_slant_right_pct = $footer_slant_deg > 0 ? $footer_slant_pct : 0;
+	$footer_slant_left = $footer_slant_left_pct . '%';
+	$footer_slant_right = $footer_slant_right_pct . '%';
 
 	if ( $header_sync_with_footer ) {
 		$header_bg_start = $footer_bg;
@@ -114,8 +116,8 @@ function upaif_output_color_vars(): void {
 		'--hero-height:' . $hero_height . 'vh;' .
 		'--hero-overlay-angle:' . $hero_overlay_angle . ';' .
 		'--hero-slant-pct:' . $hero_slant_pct . ';' .
-		'--footer-slant-left-pct:' . $footer_slant_left_pct . ';' .
-		'--footer-slant-right-pct:' . $footer_slant_right_pct . ';' .
+		'--footer-slant-left:' . $footer_slant_left . ';' .
+		'--footer-slant-right:' . $footer_slant_right . ';' .
 		'--hero-content-width:' . $hero_content_width . 'px;' .
 		'--hero-title-size:' . $hero_title_size . 'rem;' .
 		'--hero-subtitle-size:' . $hero_subtitle_size . 'rem;' .
@@ -357,7 +359,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_slant_deg',
 		array(
-			'label' => __( 'Hero slant angle (degrees)', 'upaif' ),
+			'label' => __( 'Hero slant angle', 'upaif' ),
 			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
@@ -498,7 +500,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_footer_slant_deg',
 		array(
-			'label' => __( 'Footer slant angle (degrees)', 'upaif' ),
+			'label' => __( 'Footer slant angle', 'upaif' ),
 			'section' => 'upaif_footer',
 			'type' => 'range',
 			'input_attrs' => array(
