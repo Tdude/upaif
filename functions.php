@@ -26,6 +26,44 @@ function upaif_enqueue_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'upaif_enqueue_assets' );
 
+/**
+ * Mobile menu toggle script
+ */
+function upaif_mobile_menu_script() {
+	?>
+	<script>
+	(function() {
+		var nav = document.querySelector('.upaif-nav');
+		var toggle = document.querySelector('.upaif-nav__toggle');
+		if (!nav || !toggle) return;
+		
+		toggle.addEventListener('click', function() {
+			var isOpen = nav.classList.toggle('is-open');
+			toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+		});
+		
+		// Close menu when clicking a link
+		var links = nav.querySelectorAll('.upaif-menu a, .upaif-nav__cta a');
+		links.forEach(function(link) {
+			link.addEventListener('click', function() {
+				nav.classList.remove('is-open');
+				toggle.setAttribute('aria-expanded', 'false');
+			});
+		});
+		
+		// Close menu when clicking outside
+		document.addEventListener('click', function(e) {
+			if (!nav.contains(e.target) && nav.classList.contains('is-open')) {
+				nav.classList.remove('is-open');
+				toggle.setAttribute('aria-expanded', 'false');
+			}
+		});
+	})();
+	</script>
+	<?php
+}
+add_action( 'wp_footer', 'upaif_mobile_menu_script' );
+
 function upaif_output_color_vars(): void {
 	$bg_primary = get_theme_mod( 'upaif_color_bg_primary', '#f5f0e6' );
 	$accent_gold = get_theme_mod( 'upaif_color_accent_gold', '#d4a373' );

@@ -47,24 +47,32 @@
 		<div class="upaif-hero__overlay" aria-hidden="true"></div>
 
 		<nav class="upaif-nav" aria-label="<?php esc_attr_e( 'Primary', 'upaif' ); ?>">
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'primary',
-					'container' => false,
-					'menu_class' => 'upaif-menu',
-					'fallback_cb' => false,
-				)
-			);
-			?>
-
-			<div class="upaif-nav__cta">
+			<button class="upaif-nav__toggle" aria-expanded="false" aria-controls="upaif-mobile-menu" aria-label="<?php esc_attr_e( 'Toggle menu', 'upaif' ); ?>">
+				<span class="upaif-nav__toggle-bar"></span>
+				<span class="upaif-nav__toggle-bar"></span>
+				<span class="upaif-nav__toggle-bar"></span>
+			</button>
+			
+			<div class="upaif-nav__menu-wrapper" id="upaif-mobile-menu">
 				<?php
-				$upaif_menu_cta_url = get_theme_mod( 'upaif_menu_cta_url', home_url( '/kalender' ) );
-				$upaif_menu_cta_text = get_theme_mod( 'upaif_menu_cta_text', __( 'Klasser', 'upaif' ) );
+				wp_nav_menu(
+					array(
+						'theme_location' => 'primary',
+						'container' => false,
+						'menu_class' => 'upaif-menu',
+						'fallback_cb' => false,
+					)
+				);
 				?>
-				<a href="<?php echo esc_url( $upaif_menu_cta_url ); ?>"><?php echo esc_html( $upaif_menu_cta_text ); ?></a>
-			</div>
+
+				<div class="upaif-nav__cta">
+					<?php
+					$upaif_menu_cta_url = get_theme_mod( 'upaif_menu_cta_url', home_url( '/kalender' ) );
+					$upaif_menu_cta_text = get_theme_mod( 'upaif_menu_cta_text', __( 'Klasser', 'upaif' ) );
+					?>
+					<a href="<?php echo esc_url( $upaif_menu_cta_url ); ?>"><?php echo esc_html( $upaif_menu_cta_text ); ?></a>
+				</div>
+			</div><!-- .upaif-nav__menu-wrapper -->
 
 			<?php
 			$upaif_contact_url = trim( (string) get_theme_mod( 'upaif_contact_url', home_url( '/kontakt' ) ) );
