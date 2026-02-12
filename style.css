@@ -85,7 +85,7 @@ a {
 }
 
 .upaif-nav {
-  position: absolute;
+  position: fixed;
   top: 30px;
   left: 50%;
   transform: translateX(-50%);
