@@ -21,12 +21,13 @@ get_header();
 			$upaif_news_query->the_post();
 			$upaif_news_index++;
 			$upaif_image_first = ( $upaif_news_index % 2 === 1 ); // Odd = image left, Even = image right
+			$upaif_permalink = get_permalink();
 			$upaif_thumbnail_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
 			if ( ! $upaif_thumbnail_url ) {
 				$upaif_thumbnail_url = 'https://images.unsplash.com/photo-1606890658317-7d14490b76fd?auto=format&fit=crop&q=80&w=800';
 			}
 			?>
-			<section class="upaif-section upaif-two-col">
+			<section class="upaif-section upaif-two-col upaif-clickable-post" data-permalink="<?php echo esc_url( $upaif_permalink ); ?>" tabindex="0" role="link" aria-label="<?php echo esc_attr( wp_strip_all_tags( get_the_title() ) ); ?>">
 				<?php if ( $upaif_image_first ) : ?>
 				<div>
 					<img class="upaif-section-img" src="<?php echo esc_url( $upaif_thumbnail_url ); ?>" alt="<?php the_title_attribute(); ?>">
@@ -45,7 +46,7 @@ get_header();
 						<span class="upaif-title__first"><?php echo esc_html( $upaif_first_word ); ?></span><?php echo esc_html( $upaif_rest ); ?>
 					</h2>
 					<?php the_excerpt(); ?>
-					<a class="upaif-btn upaif-btn--readmore" href="<?php the_permalink(); ?>"><?php echo esc_html( $upaif_read_more_text ); ?></a>
+					<a class="upaif-btn upaif-btn--readmore" href="<?php echo esc_url( $upaif_permalink ); ?>"><?php echo esc_html( $upaif_read_more_text ); ?></a>
 				</div>
 
 				<?php if ( ! $upaif_image_first ) : ?>

@@ -891,6 +891,15 @@ a {
   line-height: 1.2;
 }
 
+.upaif-clickable-post {
+  cursor: pointer;
+}
+
+.upaif-clickable-post:focus-visible {
+  outline: 2px solid rgba(155, 45, 48, 0.6);
+  outline-offset: 6px;
+}
+
 .upaif-news-card {
   display: block;
   text-decoration: none;

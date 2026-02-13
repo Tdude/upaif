@@ -180,7 +180,13 @@ function upaif_mobile_menu_script() {
 			});
 			
 			// Prevent parent link from navigating if it's just "#" (dropdown parent)
-			var parentLink = item.querySelector(':scope > a');
+			var parentLink = null;
+			for (var i = 0; i < item.children.length; i++) {
+				if (item.children[i].tagName && item.children[i].tagName.toUpperCase() === 'A') {
+					parentLink = item.children[i];
+					break;
+				}
+			}
 			if (parentLink && parentLink.getAttribute('href') === '#') {
 				parentLink.addEventListener('click', function(e) {
 					if (isMobile()) {
@@ -211,6 +217,38 @@ function upaif_mobile_menu_script() {
 				toggle.setAttribute('aria-expanded', 'false');
 				document.body.classList.remove('upaif-menu-open');
 			}
+		});
+
+		var clickablePosts = document.querySelectorAll('.upaif-clickable-post[data-permalink]');
+		var shouldIgnorePostClick = function(target) {
+			if (!target || !target.closest) return false;
+			return !!target.closest('a, button, input, select, textarea, label, summary, [role="button"], [contenteditable="true"]');
+		};
+
+		clickablePosts.forEach(function(post) {
+			var permalink = post.getAttribute('data-permalink');
+			if (!permalink) return;
+
+			post.addEventListener('click', function(e) {
+				if (shouldIgnorePostClick(e.target)) {
+					return;
+				}
+				if (window.getSelection && window.getSelection().toString().length > 0) {
+					return;
+				}
+				window.location.href = permalink;
+			});
+
+			post.addEventListener('keydown', function(e) {
+				if (e.key !== 'Enter' && e.key !== ' ') {
+					return;
+				}
+				if (shouldIgnorePostClick(e.target)) {
+					return;
+				}
+				e.preventDefault();
+				window.location.href = permalink;
+			});
 		});
 	})();
 	</script>
