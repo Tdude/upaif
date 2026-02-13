@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function upaif_setup() {
+	load_theme_textdomain( 'upaif', get_template_directory() . '/languages' );
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );	
 	register_nav_menus(
@@ -14,6 +15,46 @@ function upaif_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'upaif_setup' );
+
+/**
+ * Rename "Posts" to "Nyheter" in admin menu.
+ */
+function upaif_rename_posts_menu() {
+	global $menu, $submenu;
+	
+	// Main menu item
+	if ( isset( $menu[5] ) ) {
+		$menu[5][0] = 'Nyheter';
+	}
+	
+	// Submenu items
+	if ( isset( $submenu['edit.php'] ) ) {
+		$submenu['edit.php'][5][0]  = 'Alla nyheter';
+		$submenu['edit.php'][10][0] = 'Skapa nyhet';
+	}
+}
+add_action( 'admin_menu', 'upaif_rename_posts_menu' );
+
+/**
+ * Rename "Post" labels throughout admin.
+ */
+function upaif_rename_post_labels( $labels ) {
+	$labels->name               = 'Nyheter';
+	$labels->singular_name      = 'Nyhet';
+	$labels->add_new            = 'Skapa ny';
+	$labels->add_new_item       = 'Skapa ny nyhet';
+	$labels->edit_item          = 'Redigera nyhet';
+	$labels->new_item           = 'Ny nyhet';
+	$labels->view_item          = 'Visa nyhet';
+	$labels->search_items       = 'Sök nyheter';
+	$labels->not_found          = 'Inga nyheter hittades';
+	$labels->not_found_in_trash = 'Inga nyheter i papperskorgen';
+	$labels->all_items          = 'Alla nyheter';
+	$labels->menu_name          = 'Nyheter';
+	$labels->name_admin_bar     = 'Nyhet';
+	return $labels;
+}
+add_filter( 'post_type_labels_post', 'upaif_rename_post_labels' );
 
 function upaif_enqueue_assets() {
 	wp_enqueue_style( 'upaif-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
@@ -37,9 +78,24 @@ function upaif_mobile_menu_script() {
 		var toggle = document.querySelector('.upaif-nav__toggle');
 		if (!nav || !toggle) return;
 		
-		toggle.addEventListener('click', function() {
+		// Hamburger always toggles
+		toggle.addEventListener('click', function(e) {
+			e.stopPropagation();
 			var isOpen = nav.classList.toggle('is-open');
 			toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+			document.body.classList.toggle('upaif-menu-open', isOpen);
+		});
+		
+		// Tap anywhere on closed nav to open (mobile only)
+		nav.addEventListener('click', function(e) {
+			if (window.innerWidth > 768) return;
+			if (nav.classList.contains('is-open')) return;
+			// Don't trigger if clicking toggle (handled above)
+			if (e.target.closest('.upaif-nav__toggle')) return;
+			
+			nav.classList.add('is-open');
+			toggle.setAttribute('aria-expanded', 'true');
+			document.body.classList.add('upaif-menu-open');
 		});
 		
 		// Mobile submenu toggles
@@ -84,6 +140,7 @@ function upaif_mobile_menu_script() {
 				if (link.getAttribute('href') === '#') return;
 				nav.classList.remove('is-open');
 				toggle.setAttribute('aria-expanded', 'false');
+				document.body.classList.remove('upaif-menu-open');
 			});
 		});
 		
@@ -92,6 +149,7 @@ function upaif_mobile_menu_script() {
 			if (!nav.contains(e.target) && nav.classList.contains('is-open')) {
 				nav.classList.remove('is-open');
 				toggle.setAttribute('aria-expanded', 'false');
+				document.body.classList.remove('upaif-menu-open');
 			}
 		});
 	})();

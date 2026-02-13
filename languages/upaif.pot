@@ -1,0 +1,204 @@
+# UPAIF Theme Translation Template
+# Copyright (C) 2026 Uppsala Pole & Aerials
+# This file is distributed under the same license as the UPAIF theme.
+msgid ""
+msgstr ""
+"Project-Id-Version: UPAIF 0.2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-13 18:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Navigation
+msgid "Primary"
+msgstr ""
+
+msgid "Toggle menu"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+# Footer
+msgid "Instagram"
+msgstr ""
+
+msgid "Facebook"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Privacy Policy"
+msgstr ""
+
+msgid "Terms & Conditions"
+msgstr ""
+
+# General
+msgid "Posts"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Read more"
+msgstr ""
+
+# Customizer - Theme Section
+msgid "UPAIF Theme"
+msgstr ""
+
+msgid "Base background"
+msgstr ""
+
+msgid "Accent (gold)"
+msgstr ""
+
+msgid "Accent (red)"
+msgstr ""
+
+msgid "Text (dark)"
+msgstr ""
+
+msgid "Text (light)"
+msgstr ""
+
+msgid "Show title left border"
+msgstr ""
+
+msgid "Red accent border on post titles"
+msgstr ""
+
+# Customizer - Header Section
+msgid "Header Settings"
+msgstr ""
+
+msgid "Sync header colors with footer"
+msgstr ""
+
+msgid "Header background (start)"
+msgstr ""
+
+msgid "Header background (end)"
+msgstr ""
+
+msgid "Hero title"
+msgstr ""
+
+msgid "Hero subtitle"
+msgstr ""
+
+msgid "Hero height (vh)"
+msgstr ""
+
+msgid "Hero slant angle"
+msgstr ""
+
+msgid "Hero overlay fade direction"
+msgstr ""
+
+msgid "Right to left"
+msgstr ""
+
+msgid "Left to right"
+msgstr ""
+
+msgid "Hero content width (px)"
+msgstr ""
+
+msgid "Hero title size (rem)"
+msgstr ""
+
+msgid "Hero tagline size (rem)"
+msgstr ""
+
+msgid "Hero button text"
+msgstr ""
+
+msgid "Leave empty to hide"
+msgstr ""
+
+msgid "Hero button URL"
+msgstr ""
+
+msgid "Hero text alignment"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Contact page URL"
+msgstr ""
+
+msgid "Read more button text"
+msgstr ""
+
+msgid "Menu button text"
+msgstr ""
+
+msgid "Klasser"
+msgstr ""
+
+msgid "Menu button URL"
+msgstr ""
+
+msgid "Primary Menu"
+msgstr ""
+
+# Customizer - Footer Section
+msgid "Footer Settings"
+msgstr ""
+
+msgid "Footer CTA title"
+msgstr ""
+
+msgid "Footer CTA link URL"
+msgstr ""
+
+msgid "Leave empty for no link"
+msgstr ""
+
+msgid "Footer slant angle"
+msgstr ""
+
+msgid "Sync footer colors with header"
+msgstr ""
+
+msgid "Footer text width (px)"
+msgstr ""
+
+msgid "Footer title size (rem)"
+msgstr ""
+
+msgid "Footer background"
+msgstr ""
+
+msgid "Footer text color"
+msgstr ""
+
+msgid "Footer text"
+msgstr ""
+
+msgid "Footer email"
+msgstr ""
+
+msgid "Instagram URL"
+msgstr ""
+
+msgid "Facebook URL"
+msgstr ""
+
+msgid "Anmälan"
+msgstr ""

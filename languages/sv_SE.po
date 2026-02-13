@@ -1,0 +1,205 @@
+# Swedish translation for UPAIF Theme
+# Copyright (C) 2026 Uppsala Pole & Aerials
+# This file is distributed under the same license as the UPAIF theme.
+msgid ""
+msgstr ""
+"Project-Id-Version: UPAIF 0.2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-13 18:00+0000\n"
+"PO-Revision-Date: 2026-02-13 18:50+0100\n"
+"Last-Translator: Buttler <buttler@idunworks.com>\n"
+"Language-Team: Swedish\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# Navigation
+msgid "Primary"
+msgstr "Primär"
+
+msgid "Toggle menu"
+msgstr "Växla meny"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+# Footer
+msgid "Instagram"
+msgstr "Instagram"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Email"
+msgstr "E-post"
+
+msgid "Privacy Policy"
+msgstr "Integritetspolicy"
+
+msgid "Terms & Conditions"
+msgstr "Villkor"
+
+# General
+msgid "Posts"
+msgstr "Inlägg"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Read more"
+msgstr "Läs mer"
+
+# Customizer - Theme Section
+msgid "UPAIF Theme"
+msgstr "UPAIF-tema"
+
+msgid "Base background"
+msgstr "Basbakgrund"
+
+msgid "Accent (gold)"
+msgstr "Accent (guld)"
+
+msgid "Accent (red)"
+msgstr "Accent (röd)"
+
+msgid "Text (dark)"
+msgstr "Text (mörk)"
+
+msgid "Text (light)"
+msgstr "Text (ljus)"
+
+msgid "Show title left border"
+msgstr "Visa vänster ram på titlar"
+
+msgid "Red accent border on post titles"
+msgstr "Röd accentram på inläggstitlar"
+
+# Customizer - Header Section
+msgid "Header Settings"
+msgstr "Sidhuvudinställningar"
+
+msgid "Sync header colors with footer"
+msgstr "Synka sidhuvudfärger med sidfot"
+
+msgid "Header background (start)"
+msgstr "Sidhuvudbakgrund (start)"
+
+msgid "Header background (end)"
+msgstr "Sidhuvudbakgrund (slut)"
+
+msgid "Hero title"
+msgstr "Hjältetitel"
+
+msgid "Hero subtitle"
+msgstr "Hjälteundertext"
+
+msgid "Hero height (vh)"
+msgstr "Hjältehöjd (vh)"
+
+msgid "Hero slant angle"
+msgstr "Hjälte lutningsvinkel"
+
+msgid "Hero overlay fade direction"
+msgstr "Hjälte övertoningsriktning"
+
+msgid "Right to left"
+msgstr "Höger till vänster"
+
+msgid "Left to right"
+msgstr "Vänster till höger"
+
+msgid "Hero content width (px)"
+msgstr "Hjälte innehållsbredd (px)"
+
+msgid "Hero title size (rem)"
+msgstr "Hjältetitelstorlek (rem)"
+
+msgid "Hero tagline size (rem)"
+msgstr "Hjälte slogan-storlek (rem)"
+
+msgid "Hero button text"
+msgstr "Hjälteknapptext"
+
+msgid "Leave empty to hide"
+msgstr "Lämna tomt för att dölja"
+
+msgid "Hero button URL"
+msgstr "Hjälteknapp-URL"
+
+msgid "Hero text alignment"
+msgstr "Hjälte textjustering"
+
+msgid "Left"
+msgstr "Vänster"
+
+msgid "Center"
+msgstr "Centrerad"
+
+msgid "Right"
+msgstr "Höger"
+
+msgid "Contact page URL"
+msgstr "Kontaktsidans URL"
+
+msgid "Read more button text"
+msgstr "Läs mer-knapptext"
+
+msgid "Menu button text"
+msgstr "Menyknapptext"
+
+msgid "Klasser"
+msgstr "Klasser"
+
+msgid "Menu button URL"
+msgstr "Menyknapp-URL"
+
+msgid "Primary Menu"
+msgstr "Primär meny"
+
+# Customizer - Footer Section
+msgid "Footer Settings"
+msgstr "Sidfotsinställningar"
+
+msgid "Footer CTA title"
+msgstr "Sidfot CTA-titel"
+
+msgid "Footer CTA link URL"
+msgstr "Sidfot CTA-länk-URL"
+
+msgid "Leave empty for no link"
+msgstr "Lämna tomt för ingen länk"
+
+msgid "Footer slant angle"
+msgstr "Sidfot lutningsvinkel"
+
+msgid "Sync footer colors with header"
+msgstr "Synka sidfotsfärger med sidhuvud"
+
+msgid "Footer text width (px)"
+msgstr "Sidfot textbredd (px)"
+
+msgid "Footer title size (rem)"
+msgstr "Sidfot titelstorlek (rem)"
+
+msgid "Footer background"
+msgstr "Sidfotsbakgrund"
+
+msgid "Footer text color"
+msgstr "Sidfot textfärg"
+
+msgid "Footer text"
+msgstr "Sidfot text"
+
+msgid "Footer email"
+msgstr "Sidfot e-post"
+
+msgid "Instagram URL"
+msgstr "Instagram-URL"
+
+msgid "Facebook URL"
+msgstr "Facebook-URL"
+
+msgid "Anmälan"
+msgstr "Anmälan"

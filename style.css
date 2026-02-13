@@ -3,7 +3,7 @@
  Text Domain: upaif
  Author: Tibor Berki
  Author URI: https://rugd.se
- Version: 0.2.8
+ Version: 0.2.14
 */
 
 :root {
@@ -12,6 +12,11 @@
   --accent-red: #9b2d30;
   --text-dark: #2d1e12;
   --text-light: #5c4033;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 * {
@@ -29,6 +34,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-dark);
   line-height: 1.6;
+  animation: fadeIn 0.4s ease-out;
 }
 
 img {
@@ -106,6 +112,7 @@ a {
   font-weight: 500;
   font-size: 1.08rem;
   transition: color 0.25s;
+  white-space: nowrap;
 }
 
 .upaif-nav a:hover {
@@ -448,22 +455,30 @@ a {
     transform: none;
     padding: 12px 16px;
     justify-content: space-between;
+    flex-wrap: wrap;
+    max-height: 60px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  
+  .upaif-nav.is-open {
+    max-height: calc(100vh - 32px);
+    padding: 12px 16px 24px;
+    overflow-y: auto;
+    border-radius: 24px;
+  }
+  
+  /* Lock body scroll when menu is open */
+  body.upaif-menu-open {
+    overflow: hidden;
   }
   
   .upaif-nav__menu-wrapper {
     display: none;
-    position: fixed;
-    top: 70px;
-    left: 16px;
-    right: 16px;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    width: 100%;
     flex-direction: column;
     gap: 8px;
-    z-index: 100;
+    margin-top: 16px;
   }
   
   .upaif-nav.is-open .upaif-nav__menu-wrapper {
@@ -507,13 +522,19 @@ a {
     position: relative;
   }
   
+  /* Hide desktop chevron on mobile - use toggle button instead */
+  .upaif-menu > li.menu-item-has-children > a::after {
+    display: none;
+  }
+  
   .upaif-menu > li.menu-item-has-children::after {
     display: none;
   }
   
   .upaif-menu .sub-menu {
     position: static;
-    transform: none;
+    transform: none !important;
+    left: 0;
     min-width: 0;
     width: 100%;
     background: rgba(155, 45, 48, 0.04);
@@ -522,6 +543,8 @@ a {
     box-shadow: none;
     padding: 0;
     margin: 0;
+    margin-left: 0;
+    padding-left: 0;
     max-height: 0;
     overflow: hidden;
     opacity: 1;
@@ -544,8 +567,7 @@ a {
     height: 36px;
     position: absolute;
     right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 10px;
     background: rgba(155, 45, 48, 0.08);
     border: none;
     border-radius: 8px;
@@ -571,8 +593,13 @@ a {
     transform: rotate(-135deg);
   }
   
+  .upaif-menu .sub-menu li {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
   .upaif-menu .sub-menu a {
-    padding: 12px 16px 12px 32px;
+    padding: 12px 16px 12px 24px;
     font-size: 0.95rem;
   }
   
