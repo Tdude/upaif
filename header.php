@@ -42,49 +42,49 @@
 	<?php $upaif_hero_overlay_direction = (string) get_theme_mod( 'upaif_hero_overlay_direction', 'rtl' ); ?>
 	<?php $upaif_hero_overlay_direction = in_array( $upaif_hero_overlay_direction, array( 'rtl', 'ltr' ), true ) ? $upaif_hero_overlay_direction : 'rtl'; ?>
 	<?php $upaif_hero_image_side_class = $upaif_hero_overlay_direction === 'ltr' ? ' upaif-hero--image-right' : ' upaif-hero--image-left'; ?>
+
+	<!-- Nav moved outside header to escape clip-path stacking context -->
+	<nav class="upaif-nav" aria-label="<?php esc_attr_e( 'Primary', 'upaif' ); ?>">
+		<button class="upaif-nav__toggle" aria-expanded="false" aria-controls="upaif-mobile-menu" aria-label="<?php esc_attr_e( 'Toggle menu', 'upaif' ); ?>">
+			<span class="upaif-nav__toggle-bar"></span>
+			<span class="upaif-nav__toggle-bar"></span>
+			<span class="upaif-nav__toggle-bar"></span>
+		</button>
+		
+		<div class="upaif-nav__menu-wrapper" id="upaif-mobile-menu">
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'primary',
+					'container' => false,
+					'menu_class' => 'upaif-menu',
+					'fallback_cb' => false,
+				)
+			);
+			?>
+
+			<div class="upaif-nav__cta">
+				<?php
+				$upaif_menu_cta_url = get_theme_mod( 'upaif_menu_cta_url', home_url( '/kalender' ) );
+				$upaif_menu_cta_text = get_theme_mod( 'upaif_menu_cta_text', __( 'Klasser', 'upaif' ) );
+				?>
+				<a href="<?php echo esc_url( $upaif_menu_cta_url ); ?>"><?php echo esc_html( $upaif_menu_cta_text ); ?></a>
+			</div>
+		</div><!-- .upaif-nav__menu-wrapper -->
+
+		<?php $upaif_contact_url = trim( (string) get_theme_mod( 'upaif_contact_url', home_url( '/kontakt' ) ) ); ?>
+		<?php if ( $upaif_contact_url ) : ?>
+			<div class="upaif-nav__icons">
+				<a class="upaif-icon-box" href="<?php echo esc_url( $upaif_contact_url ); ?>" aria-label="<?php esc_attr_e( 'Contact', 'upaif' ); ?>">
+					<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+				</a>
+			</div>
+		<?php endif; ?>
+	</nav>
+
 	<header class="upaif-hero<?php echo $upaif_is_front ? '' : ' upaif-hero--small'; ?><?php echo esc_attr( $upaif_hero_image_side_class ); ?>">
 		<div class="upaif-hero__bg" style="background-image: url('<?php echo esc_url( $upaif_hero_image_url ); ?>');"></div>
 		<div class="upaif-hero__overlay" aria-hidden="true"></div>
-
-		<nav class="upaif-nav" aria-label="<?php esc_attr_e( 'Primary', 'upaif' ); ?>">
-			<button class="upaif-nav__toggle" aria-expanded="false" aria-controls="upaif-mobile-menu" aria-label="<?php esc_attr_e( 'Toggle menu', 'upaif' ); ?>">
-				<span class="upaif-nav__toggle-bar"></span>
-				<span class="upaif-nav__toggle-bar"></span>
-				<span class="upaif-nav__toggle-bar"></span>
-			</button>
-			
-			<div class="upaif-nav__menu-wrapper" id="upaif-mobile-menu">
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'primary',
-						'container' => false,
-						'menu_class' => 'upaif-menu',
-						'fallback_cb' => false,
-					)
-				);
-				?>
-
-				<div class="upaif-nav__cta">
-					<?php
-					$upaif_menu_cta_url = get_theme_mod( 'upaif_menu_cta_url', home_url( '/kalender' ) );
-					$upaif_menu_cta_text = get_theme_mod( 'upaif_menu_cta_text', __( 'Klasser', 'upaif' ) );
-					?>
-					<a href="<?php echo esc_url( $upaif_menu_cta_url ); ?>"><?php echo esc_html( $upaif_menu_cta_text ); ?></a>
-				</div>
-			</div><!-- .upaif-nav__menu-wrapper -->
-
-			<?php
-			$upaif_contact_url = trim( (string) get_theme_mod( 'upaif_contact_url', home_url( '/kontakt' ) ) );
-			?>
-			<?php if ( $upaif_contact_url ) : ?>
-				<div class="upaif-nav__icons">
-					<a class="upaif-icon-box" href="<?php echo esc_url( $upaif_contact_url ); ?>" aria-label="<?php esc_attr_e( 'Contact', 'upaif' ); ?>">
-						<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-					</a>
-				</div>
-			<?php endif; ?>
-		</nav>
 
 		<?php $upaif_hero_text_align = (string) get_theme_mod( 'upaif_hero_text_align', 'center' ); ?>
 		<?php $upaif_hero_text_align = in_array( $upaif_hero_text_align, array( 'left', 'center', 'right' ), true ) ? $upaif_hero_text_align : 'center'; ?>
