@@ -100,6 +100,13 @@ function upaif_mobile_menu_script() {
 }
 add_action( 'wp_footer', 'upaif_mobile_menu_script' );
 
+/**
+ * Sanitize integer for customizer (intval wrapper that ignores extra args)
+ */
+function upaif_sanitize_int( $value ) {
+	return intval( $value );
+}
+
 function upaif_output_color_vars(): void {
 	$bg_primary = get_theme_mod( 'upaif_color_bg_primary', '#f5f0e6' );
 	$accent_gold = get_theme_mod( 'upaif_color_accent_gold', '#d4a373' );
@@ -615,7 +622,7 @@ function upaif_customize_register( $wp_customize ) {
 		'upaif_footer_slant_deg',
 		array(
 			'default' => 0,
-			'sanitize_callback' => 'intval',
+			'sanitize_callback' => 'upaif_sanitize_int',
 			'transport' => 'postMessage',
 		)
 	);
