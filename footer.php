@@ -5,7 +5,15 @@
 			<div class="upaif-cta-content">
 				<div class="upaif-footer__top">
 					<div class="upaif-footer__left">
-						<h2 class="upaif-cta-title"><?php echo esc_html( get_theme_mod( 'upaif_footer_cta_title', 'Intresserad av gruppevent?' ) ); ?></h2>
+						<?php
+						$upaif_cta_title = get_theme_mod( 'upaif_footer_cta_title', 'Intresserad av gruppevent?' );
+						$upaif_cta_words = explode( ' ', $upaif_cta_title, 2 );
+						$upaif_cta_first = $upaif_cta_words[0];
+						$upaif_cta_rest = isset( $upaif_cta_words[1] ) ? ' ' . $upaif_cta_words[1] : '';
+						?>
+						<h2 class="upaif-cta-title upaif-title--black-red">
+							<span class="upaif-title__first"><?php echo esc_html( $upaif_cta_first ); ?></span><?php echo esc_html( $upaif_cta_rest ); ?>
+						</h2>
 						<?php $upaif_footer_text = trim( (string) get_theme_mod( 'upaif_footer_text', '' ) ); ?>
 						<?php if ( $upaif_footer_text ) : ?>
 							<p class="upaif-footer__text"><?php echo nl2br( esc_html( $upaif_footer_text ) ); ?></p>
