@@ -572,6 +572,23 @@ function upaif_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'upaif_footer_cta_url',
+		array(
+			'default' => '',
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_footer_cta_url',
+		array(
+			'label' => __( 'Footer CTA link URL', 'upaif' ),
+			'description' => __( 'Leave empty for no link', 'upaif' ),
+			'section' => 'upaif_footer',
+			'type' => 'url',
+		)
+	);
+
+	$wp_customize->add_setting(
 		'upaif_footer_slant_deg',
 		array(
 			'default' => 0,
