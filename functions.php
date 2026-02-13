@@ -77,6 +77,67 @@ function upaif_mobile_menu_script() {
 		var nav = document.querySelector('.upaif-nav');
 		var toggle = document.querySelector('.upaif-nav__toggle');
 		if (!nav || !toggle) return;
+
+		var DESKTOP_BREAKPOINT = 768;
+		var desktopHideOffset = 140;
+		var desktopTopSafeZone = 90;
+		var desktopDeltaThreshold = 12;
+		var navHidden = false;
+		var lastScrollY = window.scrollY || window.pageYOffset || 0;
+		var scrollTicking = false;
+		var isMobile = function() { return window.innerWidth <= DESKTOP_BREAKPOINT; };
+
+		var setDesktopNavHidden = function(shouldHide) {
+			if (navHidden === shouldHide) return;
+			navHidden = shouldHide;
+			nav.classList.toggle('is-hidden', shouldHide);
+		};
+
+		var updateDesktopNavVisibility = function() {
+			var currentY = window.scrollY || window.pageYOffset || 0;
+			var delta = currentY - lastScrollY;
+
+			if (currentY <= desktopTopSafeZone) {
+				setDesktopNavHidden(false);
+				lastScrollY = currentY;
+				return;
+			}
+
+			if (Math.abs(delta) < desktopDeltaThreshold) {
+				return;
+			}
+
+			if (delta > 0 && currentY > desktopHideOffset) {
+				setDesktopNavHidden(true);
+			} else {
+				setDesktopNavHidden(false);
+			}
+
+			lastScrollY = currentY;
+		};
+
+		window.addEventListener('scroll', function() {
+			if (isMobile()) {
+				setDesktopNavHidden(false);
+				lastScrollY = window.scrollY || window.pageYOffset || 0;
+				return;
+			}
+
+			if (scrollTicking) return;
+			scrollTicking = true;
+
+			window.requestAnimationFrame(function() {
+				updateDesktopNavVisibility();
+				scrollTicking = false;
+			});
+		}, { passive: true });
+
+		window.addEventListener('resize', function() {
+			if (isMobile()) {
+				setDesktopNavHidden(false);
+			}
+			lastScrollY = window.scrollY || window.pageYOffset || 0;
+		});
 		
 		// Hamburger always toggles
 		toggle.addEventListener('click', function(e) {
@@ -99,7 +160,6 @@ function upaif_mobile_menu_script() {
 		});
 		
 		// Mobile submenu toggles
-		var isMobile = function() { return window.innerWidth <= 768; };
 		var subMenuParents = nav.querySelectorAll('.menu-item-has-children');
 		
 		subMenuParents.forEach(function(item) {

@@ -92,7 +92,7 @@ a {
 
 .upaif-nav {
   position: fixed;
-  top: 30px;
+  top: 32px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
@@ -104,6 +104,14 @@ a {
   display: flex;
   gap: 36px;
   align-items: center;
+  transition: transform 0.28s ease, opacity 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.upaif-nav.is-hidden {
+  transform: translate(-50%, -120%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .upaif-nav a {
@@ -326,7 +334,7 @@ a {
 
 .upaif-hero__cta {
   display: inline-block;
-  margin-top: 2rem;
+  margin-top: 4rem;
   padding: 18px 48px;
   background: var(--accent-red);
   color: #fff;
