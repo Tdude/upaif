@@ -92,6 +92,13 @@
 			<?php if ( $upaif_is_front ) : ?>
 				<h1 class="upaif-hero__title"><?php echo wp_kses_post( nl2br( esc_html( get_theme_mod( 'upaif_hero_title', "UPPSALA POLE\n& AERIALS" ) ) ) ); ?></h1>
 				<p class="upaif-hero__subtitle"><?php echo esc_html( get_theme_mod( 'upaif_hero_subtitle', 'Dans – Hållbarhet – Gemenskap' ) ); ?></p>
+				<?php
+				$upaif_hero_cta_text = trim( (string) get_theme_mod( 'upaif_hero_cta_text', '' ) );
+				$upaif_hero_cta_url = trim( (string) get_theme_mod( 'upaif_hero_cta_url', '' ) );
+				if ( $upaif_hero_cta_text && $upaif_hero_cta_url ) :
+				?>
+					<a class="upaif-hero__cta" href="<?php echo esc_url( $upaif_hero_cta_url ); ?>"><?php echo esc_html( $upaif_hero_cta_text ); ?></a>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 	</header>

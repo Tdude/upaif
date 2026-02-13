@@ -3,7 +3,7 @@
  Text Domain: upaif
  Author: Tibor Berki
  Author URI: https://rugd.se
- Version: 0.2.7
+ Version: 0.2.8
 */
 
 :root {
@@ -317,6 +317,27 @@ a {
   opacity: 0.96;
 }
 
+.upaif-hero__cta {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 18px 48px;
+  background: var(--accent-red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 12px 36px rgba(155, 45, 48, 0.4);
+  transition: all 0.3s ease;
+  text-shadow: none;
+}
+
+.upaif-hero__cta:hover {
+  background: #7f2427;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 48px rgba(155, 45, 48, 0.5);
+}
+
 .upaif-main {
   padding: 4rem 0 3rem;
   position: relative;
@@ -381,6 +402,23 @@ a {
   display: contents;
 }
 
+/* Tablet breakpoint - tighten nav */
+@media (max-width: 1100px) {
+  .upaif-nav {
+    padding: 12px 28px;
+    gap: 24px;
+  }
+  .upaif-menu {
+    gap: 16px;
+  }
+  .upaif-nav a {
+    font-size: 1rem;
+  }
+  .upaif-nav__cta a {
+    padding: 10px 22px;
+  }
+}
+
 @media (max-width: 900px) {
   .upaif-two-col {
     grid-template-columns: 1fr;
@@ -389,15 +427,6 @@ a {
   .upaif-hero__bg {
     width: 100%;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 88%);
-  }
-  .upaif-nav {
-    width: calc(100% - 24px);
-    padding: 12px 18px;
-    gap: 18px;
-  }
-  .upaif-menu {
-    flex-wrap: wrap;
-    gap: 12px 16px;
   }
   .upaif-nav__icons {
     display: none;

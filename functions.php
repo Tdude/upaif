@@ -548,6 +548,39 @@ function upaif_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'upaif_hero_cta_text',
+		array(
+			'default' => '',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_cta_text',
+		array(
+			'label' => __( 'Hero button text', 'upaif' ),
+			'description' => __( 'Leave empty to hide', 'upaif' ),
+			'section' => 'upaif_header',
+			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_hero_cta_url',
+		array(
+			'default' => '',
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_hero_cta_url',
+		array(
+			'label' => __( 'Hero button URL', 'upaif' ),
+			'section' => 'upaif_header',
+			'type' => 'url',
+		)
+	);
+
+	$wp_customize->add_setting(
 		'upaif_hero_text_align',
 		array(
 			'default' => 'center',
