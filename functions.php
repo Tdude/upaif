@@ -199,6 +199,12 @@ function upaif_output_color_vars(): void {
 		'--footer-title-size:' . $footer_title_size . 'rem;' .
 		'}';
 
+	// Title border toggle
+	$title_border_enabled = absint( get_theme_mod( 'upaif_title_border_enabled', 1 ) );
+	if ( ! $title_border_enabled ) {
+		$css .= '.upaif-post-title{border-left:none;padding-left:0;}';
+	}
+
 	wp_add_inline_style( 'upaif-style', $css );
 }
 add_action( 'wp_enqueue_scripts', 'upaif_output_color_vars', 20 );
@@ -552,6 +558,23 @@ function upaif_customize_register( $wp_customize ) {
 				'center' => __( 'Center', 'upaif' ),
 				'right' => __( 'Right', 'upaif' ),
 			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'upaif_title_border_enabled',
+		array(
+			'default' => 1,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_title_border_enabled',
+		array(
+			'label' => __( 'Show title left border', 'upaif' ),
+			'description' => __( 'Red accent border on post titles', 'upaif' ),
+			'section' => 'upaif_theme',
+			'type' => 'checkbox',
 		)
 	);
 
