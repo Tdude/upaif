@@ -42,10 +42,46 @@ function upaif_mobile_menu_script() {
 			toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 		});
 		
-		// Close menu when clicking a link
+		// Mobile submenu toggles
+		var isMobile = function() { return window.innerWidth <= 768; };
+		var subMenuParents = nav.querySelectorAll('.menu-item-has-children');
+		
+		subMenuParents.forEach(function(item) {
+			// Create toggle button for mobile
+			var btn = document.createElement('button');
+			btn.className = 'upaif-submenu-toggle';
+			btn.setAttribute('aria-label', 'Toggle submenu');
+			btn.setAttribute('aria-expanded', 'false');
+			item.appendChild(btn);
+			
+			btn.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				if (!isMobile()) return;
+				
+				var isOpen = item.classList.toggle('submenu-open');
+				btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+			});
+			
+			// Prevent parent link from navigating if it's just "#" (dropdown parent)
+			var parentLink = item.querySelector(':scope > a');
+			if (parentLink && parentLink.getAttribute('href') === '#') {
+				parentLink.addEventListener('click', function(e) {
+					if (isMobile()) {
+						e.preventDefault();
+						item.classList.toggle('submenu-open');
+						btn.setAttribute('aria-expanded', item.classList.contains('submenu-open') ? 'true' : 'false');
+					}
+				});
+			}
+		});
+		
+		// Close menu when clicking a link (but not submenu toggles or parent links)
 		var links = nav.querySelectorAll('.upaif-menu a, .upaif-nav__cta a');
 		links.forEach(function(link) {
-			link.addEventListener('click', function() {
+			link.addEventListener('click', function(e) {
+				// Don't close if it's a parent with # href
+				if (link.getAttribute('href') === '#') return;
 				nav.classList.remove('is-open');
 				toggle.setAttribute('aria-expanded', 'false');
 			});
@@ -303,6 +339,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => '#e8d9c5',
 			'sanitize_callback' => 'sanitize_hex_color',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -321,6 +358,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => '#d4c0a0',
 			'sanitize_callback' => 'sanitize_hex_color',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -371,6 +409,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 60,
 			'sanitize_callback' => 'absint',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -392,6 +431,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 20,
 			'sanitize_callback' => 'absint',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -433,6 +473,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 1100,
 			'sanitize_callback' => 'absint',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -454,6 +495,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 6.2,
 			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -475,6 +517,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 2.2,
 			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -533,6 +576,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 0,
 			'sanitize_callback' => 'intval',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -570,6 +614,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 520,
 			'sanitize_callback' => 'absint',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -591,6 +636,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => 3.0,
 			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -612,6 +658,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => '#d4a373',
 			'sanitize_callback' => 'sanitize_hex_color',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -630,6 +677,7 @@ function upaif_customize_register( $wp_customize ) {
 		array(
 			'default' => '#2d1e12',
 			'sanitize_callback' => 'sanitize_hex_color',
+			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
@@ -772,3 +820,17 @@ function upaif_customize_register( $wp_customize ) {
 	);
 }
 add_action( 'customize_register', 'upaif_customize_register' );
+
+/**
+ * Enqueue Customizer live preview script.
+ */
+function upaif_customizer_preview_js() {
+	wp_enqueue_script(
+		'upaif-customizer-preview',
+		get_template_directory_uri() . '/customizer-preview.js',
+		array( 'customize-preview', 'jquery' ),
+		filemtime( get_template_directory() . '/customizer-preview.js' ),
+		true
+	);
+}
+add_action( 'customize_preview_init', 'upaif_customizer_preview_js' );

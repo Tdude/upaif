@@ -3,7 +3,7 @@
  Text Domain: upaif
  Author: Tibor Berki
  Author URI: https://rugd.se
- Version: 0.1.0
+ Version: 0.2.0
 */
 
 :root {
@@ -126,6 +126,95 @@ a {
 .upaif-menu .current-menu-item > a,
 .upaif-menu .current_page_item > a {
   color: var(--accent-red);
+}
+
+/* ─────────────────────────────────────────────────────────
+   Submenus / Dropdowns
+   ───────────────────────────────────────────────────────── */
+.upaif-menu > li {
+  position: relative;
+}
+
+.upaif-menu .sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  padding: 10px 0;
+  margin-top: 12px;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 100;
+}
+
+/* Arrow/bridge so hover doesn't break when moving to submenu */
+.upaif-menu > li.menu-item-has-children::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: transparent;
+}
+
+/* Show on hover (desktop) */
+.upaif-menu > li.menu-item-has-children:hover > .sub-menu,
+.upaif-menu > li.menu-item-has-children:focus-within > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Dropdown indicator arrow */
+.upaif-menu > li.menu-item-has-children > a::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: 6px;
+  margin-bottom: 2px;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.upaif-menu > li.menu-item-has-children:hover > a::after {
+  transform: rotate(-135deg);
+}
+
+/* Submenu items */
+.upaif-menu .sub-menu li {
+  margin: 0;
+}
+
+.upaif-menu .sub-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.upaif-menu .sub-menu a:hover {
+  background: rgba(155, 45, 48, 0.08);
+  color: var(--accent-red);
+}
+
+/* Hide mobile toggle buttons on desktop */
+.upaif-submenu-toggle {
+  display: none;
 }
 
 .upaif-nav__cta a {
@@ -382,6 +471,91 @@ a {
     display: block;
     text-align: center;
     width: 100%;
+  }
+  
+  /* Mobile submenu overrides */
+  .upaif-menu > li {
+    position: relative;
+  }
+  
+  .upaif-menu > li.menu-item-has-children::after {
+    display: none;
+  }
+  
+  .upaif-menu .sub-menu {
+    position: static;
+    transform: none;
+    min-width: 0;
+    width: 100%;
+    background: rgba(155, 45, 48, 0.04);
+    backdrop-filter: none;
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  
+  /* Tap to expand - active state */
+  .upaif-menu > li.menu-item-has-children.submenu-open > .sub-menu {
+    max-height: 500px;
+    padding: 8px 0;
+  }
+  
+  /* Show submenu toggle button on mobile */
+  .upaif-submenu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(155, 45, 48, 0.08);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .upaif-submenu-toggle:hover {
+    background: rgba(155, 45, 48, 0.15);
+  }
+  
+  .upaif-submenu-toggle::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--text-dark);
+    border-bottom: 2px solid var(--text-dark);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+  
+  .menu-item-has-children.submenu-open .upaif-submenu-toggle::before {
+    transform: rotate(-135deg);
+  }
+  
+  .upaif-menu .sub-menu a {
+    padding: 12px 16px 12px 32px;
+    font-size: 0.95rem;
+  }
+  
+  /* Hover doesn't open on mobile */
+  .upaif-menu > li.menu-item-has-children:hover > .sub-menu {
+    max-height: 0;
+    padding: 0;
+  }
+  
+  .upaif-menu > li.menu-item-has-children.submenu-open:hover > .sub-menu {
+    max-height: 500px;
+    padding: 8px 0;
   }
 }
 
