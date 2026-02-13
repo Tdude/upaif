@@ -59,7 +59,16 @@ get_header();
 				<?php endif; ?>
 
 				<div class="upaif-content">
-					<?php the_title( '<h2 class="upaif-section-title upaif-post-title">', '</h2>' ); ?>
+					<?php
+					$upaif_title = get_the_title();
+					$upaif_title_words = explode( ' ', $upaif_title, 2 );
+					$upaif_first_word = $upaif_title_words[0];
+					$upaif_rest = isset( $upaif_title_words[1] ) ? ' ' . $upaif_title_words[1] : '';
+					$upaif_color_class = ( $upaif_news_index % 2 === 1 ) ? 'upaif-title--black-red' : 'upaif-title--red-black';
+					?>
+					<h2 class="upaif-section-title upaif-post-title <?php echo esc_attr( $upaif_color_class ); ?>">
+						<span class="upaif-title__first"><?php echo esc_html( $upaif_first_word ); ?></span><?php echo esc_html( $upaif_rest ); ?>
+					</h2>
 					<?php the_excerpt(); ?>
 					<a class="upaif-btn upaif-btn--readmore" href="<?php the_permalink(); ?>"><?php echo esc_html( $upaif_read_more_text ); ?></a>
 				</div>

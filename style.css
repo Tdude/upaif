@@ -3,7 +3,7 @@
  Text Domain: upaif
  Author: Tibor Berki
  Author URI: https://rugd.se
- Version: 0.2.2
+ Version: 0.2.3
 */
 
 :root {
@@ -583,6 +583,21 @@ a {
 .upaif-post-title {
   border-left: 0.2em solid var(--accent-red);
   padding-left: 0.7em;
+}
+
+/* Alternating title colors: first word vs rest */
+.upaif-title--black-red {
+  color: var(--accent-red);
+}
+.upaif-title--black-red .upaif-title__first {
+  color: var(--text-dark);
+}
+
+.upaif-title--red-black {
+  color: var(--text-dark);
+}
+.upaif-title--red-black .upaif-title__first {
+  color: var(--accent-red);
 }
 
 .upaif-btn--readmore {
