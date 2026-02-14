@@ -3,7 +3,7 @@
  Text Domain: upaif
  Author: Tibor Berki
  Author URI: https://rugd.se
- Version: 0.2.14
+ Version: 0.2.15
 */
 
 :root {
@@ -35,6 +35,7 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   animation: fadeIn 0.4s ease-out;
+  overflow-x: hidden;
 }
 
 img {
@@ -651,10 +652,14 @@ a {
 
 .upaif-section-title {
   font-family: "Playfair Display", serif;
-  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-size: clamp(2.2rem, 7vw, 5.2rem);
   color: var(--accent-red);
   margin-bottom: 1.5rem;
   line-height: 1.08;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
 }
 
 .upaif-section-title span {

@@ -78,64 +78,63 @@ function upaif_mobile_menu_script() {
 		var toggle = document.querySelector('.upaif-nav__toggle');
 		if (!nav || !toggle) return;
 
-		var DESKTOP_BREAKPOINT = 768;
-		var desktopHideOffset = 140;
-		var desktopTopSafeZone = 90;
-		var desktopDeltaThreshold = 12;
+		var MOBILE_BREAKPOINT = 768;
+		var hideOffset = 100;
+		var topSafeZone = 60;
+		var deltaThreshold = 8;
 		var navHidden = false;
 		var lastScrollY = window.scrollY || window.pageYOffset || 0;
 		var scrollTicking = false;
-		var isMobile = function() { return window.innerWidth <= DESKTOP_BREAKPOINT; };
+		var isMobile = function() { return window.innerWidth <= MOBILE_BREAKPOINT; };
 
-		var setDesktopNavHidden = function(shouldHide) {
+		var setNavHidden = function(shouldHide) {
+			// Never hide if mobile menu is open
+			if (nav.classList.contains('is-open')) {
+				shouldHide = false;
+			}
 			if (navHidden === shouldHide) return;
 			navHidden = shouldHide;
 			nav.classList.toggle('is-hidden', shouldHide);
 		};
 
-		var updateDesktopNavVisibility = function() {
+		var updateNavVisibility = function() {
 			var currentY = window.scrollY || window.pageYOffset || 0;
 			var delta = currentY - lastScrollY;
 
-			if (currentY <= desktopTopSafeZone) {
-				setDesktopNavHidden(false);
+			// Always show near top
+			if (currentY <= topSafeZone) {
+				setNavHidden(false);
 				lastScrollY = currentY;
 				return;
 			}
 
-			if (Math.abs(delta) < desktopDeltaThreshold) {
+			// Ignore tiny scrolls
+			if (Math.abs(delta) < deltaThreshold) {
 				return;
 			}
 
-			if (delta > 0 && currentY > desktopHideOffset) {
-				setDesktopNavHidden(true);
+			// Scrolling down past threshold = hide
+			if (delta > 0 && currentY > hideOffset) {
+				setNavHidden(true);
 			} else {
-				setDesktopNavHidden(false);
+				// Scrolling up = show
+				setNavHidden(false);
 			}
 
 			lastScrollY = currentY;
 		};
 
 		window.addEventListener('scroll', function() {
-			if (isMobile()) {
-				setDesktopNavHidden(false);
-				lastScrollY = window.scrollY || window.pageYOffset || 0;
-				return;
-			}
-
 			if (scrollTicking) return;
 			scrollTicking = true;
 
 			window.requestAnimationFrame(function() {
-				updateDesktopNavVisibility();
+				updateNavVisibility();
 				scrollTicking = false;
 			});
 		}, { passive: true });
 
 		window.addEventListener('resize', function() {
-			if (isMobile()) {
-				setDesktopNavHidden(false);
-			}
 			lastScrollY = window.scrollY || window.pageYOffset || 0;
 		});
 		
