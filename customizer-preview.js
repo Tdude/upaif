@@ -55,9 +55,12 @@
   wp.customize('upaif_hero_slant_deg', function(value) {
     value.bind(function(newVal) {
       var deg = parseInt(newVal, 10) || 0;
-      deg = Math.max(0, Math.min(30, deg));
-      var pct = Math.round((deg / 30) * 18 * 100) / 100;
-      setCSSVar('--hero-slant-pct', pct);
+      deg = Math.max(-30, Math.min(30, deg));
+      var pct = Math.round((Math.abs(deg) / 30) * 18 * 100) / 100;
+      var leftPct = deg < 0 ? pct + '%' : '0%';
+      var rightPct = deg > 0 ? pct + '%' : '0%';
+      setCSSVar('--hero-slant-left', leftPct);
+      setCSSVar('--hero-slant-right', rightPct);
     });
   });
 

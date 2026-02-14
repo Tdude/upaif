@@ -56,7 +56,12 @@ a {
   background: linear-gradient(135deg, var(--header-bg-start, #e8d9c5) 0%, var(--header-bg-end, #d4c0a0) 100%);
   color: #fff;
   overflow: hidden;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - (var(--hero-slant-pct, 12) * 1%)));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--hero-slant-right, 0%)),
+    0 calc(100% - var(--hero-slant-left, 0%))
+  );
   padding-bottom: 12vh;
 }
 
@@ -69,14 +74,24 @@ a {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - (var(--hero-slant-pct, 12) * 1%)));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--hero-slant-right, 0%)),
+    0 calc(100% - var(--hero-slant-left, 0%))
+  );
   opacity: 1;
 }
 
 .upaif-hero.upaif-hero--image-right .upaif-hero__bg {
   left: auto;
   right: 0;
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - (var(--hero-slant-pct, 12) * 1%)), 0 100%);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--hero-slant-right, 0%)),
+    0 calc(100% - var(--hero-slant-left, 0%))
+  );
 }
 
 .upaif-hero__overlay {
@@ -259,7 +274,8 @@ a {
   color: inherit;
 }
 
-.upaif-icon-box {
+.upaif-icon-box,
+.upaif-social__icon {
   width: 58px;
   height: 58px;
   background: #fff;
@@ -272,12 +288,14 @@ a {
   transition: all 0.25s ease;
 }
 
-.upaif-icon-box:hover {
+.upaif-icon-box:hover,
+.upaif-social__icon:hover {
   transform: translateY(-4px) scale(1.06);
   box-shadow: 0 12px 36px rgba(155, 45, 48, 0.55), inset 0 1px 4px rgba(255, 255, 255, 0.8);
 }
 
-.upaif-icon-box svg {
+.upaif-icon-box svg,
+.upaif-social__icon svg {
   width: 34px;
   height: 34px;
   fill: var(--accent-red);
@@ -768,26 +786,12 @@ a {
 
 .upaif-social__icon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.0);
-  box-shadow: none;
   margin: 0 0 0 12px;
   text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.upaif-social__icon:hover {
-  transform: translateY(-2px) scale(1.06);
 }
 
 .upaif-social__icon svg {
-  width: 32px;
-  height: 32px;
-  fill: var(--accent-red);
+  display: block;
 }
 
 .upaif-social a {

@@ -277,7 +277,7 @@ function upaif_output_color_vars(): void {
 	$header_bg_end = get_theme_mod( 'upaif_header_bg_end_color', '#d4c0a0' );
 	$hero_height = absint( get_theme_mod( 'upaif_hero_height_vh', 60 ) );
 	$hero_overlay_direction = (string) get_theme_mod( 'upaif_hero_overlay_direction', 'rtl' );
-	$hero_slant_deg = absint( get_theme_mod( 'upaif_hero_slant_deg', 20 ) );
+	$hero_slant_deg = intval( get_theme_mod( 'upaif_hero_slant_deg', 0 ) );
 	$footer_slant_deg = intval( get_theme_mod( 'upaif_footer_slant_deg', 0 ) );
 	$hero_content_width = absint( get_theme_mod( 'upaif_hero_content_width_px', 1100 ) );
 	$hero_title_size = (float) get_theme_mod( 'upaif_hero_title_size_rem', 6.2 );
@@ -296,7 +296,7 @@ function upaif_output_color_vars(): void {
 	$header_bg_end = sanitize_hex_color( $header_bg_end ) ?: '#d4c0a0';
 
 	$hero_height = max( 30, min( 100, $hero_height ) );
-	$hero_slant_deg = max( 0, min( 30, $hero_slant_deg ) );
+	$hero_slant_deg = max( -30, min( 30, $hero_slant_deg ) );
 	$footer_slant_deg = max( -30, min( 30, $footer_slant_deg ) );
 	$hero_content_width = max( 420, min( 1600, $hero_content_width ) );
 	$hero_title_size = max( 3.0, min( 10.0, $hero_title_size ) );
@@ -304,7 +304,11 @@ function upaif_output_color_vars(): void {
 	$footer_title_width = max( 320, min( 1200, $footer_title_width ) );
 	$footer_title_size = max( 1.6, min( 6.0, $footer_title_size ) );
 	$hero_overlay_angle = $hero_overlay_direction === 'ltr' ? '270deg' : '90deg';
-	$hero_slant_pct = round( ( $hero_slant_deg / 30 ) * 18, 2 );
+	$hero_slant_pct = round( ( abs( $hero_slant_deg ) / 30 ) * 18, 2 );
+	$hero_slant_left_pct = $hero_slant_deg < 0 ? $hero_slant_pct : 0;
+	$hero_slant_right_pct = $hero_slant_deg > 0 ? $hero_slant_pct : 0;
+	$hero_slant_left = $hero_slant_left_pct . '%';
+	$hero_slant_right = $hero_slant_right_pct . '%';
 	$footer_slant_pct = round( ( abs( $footer_slant_deg ) / 30 ) * 18, 2 );
 	$footer_slant_left_pct = $footer_slant_deg < 0 ? $footer_slant_pct : 0;
 	$footer_slant_right_pct = $footer_slant_deg > 0 ? $footer_slant_pct : 0;
@@ -352,7 +356,8 @@ function upaif_output_color_vars(): void {
 		'--footer-text:' . $footer_text . ';' .
 		'--hero-height:' . $hero_height . 'vh;' .
 		'--hero-overlay-angle:' . $hero_overlay_angle . ';' .
-		'--hero-slant-pct:' . $hero_slant_pct . ';' .
+		'--hero-slant-left:' . $hero_slant_left . ';' .
+		'--hero-slant-right:' . $hero_slant_right . ';' .
 		'--footer-slant-left:' . $footer_slant_left . ';' .
 		'--footer-slant-right:' . $footer_slant_right . ';' .
 		'--hero-content-width:' . $hero_content_width . 'px;' .
@@ -551,7 +556,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_title',
 		array(
-			'label' => __( 'Hero title', 'upaif' ),
+			'label' => 'Hero title',
 			'section' => 'upaif_header',
 			'type' => 'textarea',
 		)
@@ -567,7 +572,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_subtitle',
 		array(
-			'label' => __( 'Hero subtitle', 'upaif' ),
+			'label' => 'Hero subtitle',
 			'section' => 'upaif_header',
 			'type' => 'text',
 		)
@@ -584,7 +589,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_height_vh',
 		array(
-			'label' => __( 'Hero height (vh)', 'upaif' ),
+			'label' => 'Hero height (vh)',
 			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
@@ -598,19 +603,19 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'upaif_hero_slant_deg',
 		array(
-			'default' => 20,
-			'sanitize_callback' => 'absint',
+			'default' => 0,
+			'sanitize_callback' => 'upaif_sanitize_int',
 			'transport' => 'postMessage',
 		)
 	);
 	$wp_customize->add_control(
 		'upaif_hero_slant_deg',
 		array(
-			'label' => __( 'Hero slant angle', 'upaif' ),
+			'label' => 'Hero slant angle',
 			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
-				'min' => 0,
+				'min' => -30,
 				'max' => 30,
 				'step' => 1,
 			),
@@ -627,7 +632,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_overlay_direction',
 		array(
-			'label' => __( 'Hero overlay fade direction', 'upaif' ),
+			'label' => 'Hero overlay fade direction',
 			'section' => 'upaif_header',
 			'type' => 'select',
 			'choices' => array(
@@ -648,7 +653,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_content_width_px',
 		array(
-			'label' => __( 'Hero content width (px)', 'upaif' ),
+			'label' => 'Hero content width (px)',
 			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
@@ -670,7 +675,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_title_size_rem',
 		array(
-			'label' => __( 'Hero title size (rem)', 'upaif' ),
+			'label' => 'Hero title size (rem)',
 			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
@@ -692,7 +697,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_subtitle_size_rem',
 		array(
-			'label' => __( 'Hero tagline size (rem)', 'upaif' ),
+			'label' => 'Hero tagline size (rem)',
 			'section' => 'upaif_header',
 			'type' => 'range',
 			'input_attrs' => array(
@@ -713,7 +718,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_cta_text',
 		array(
-			'label' => __( 'Hero button text', 'upaif' ),
+			'label' => 'Hero button text',
 			'description' => __( 'Leave empty to hide', 'upaif' ),
 			'section' => 'upaif_header',
 			'type' => 'text',
@@ -730,7 +735,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_cta_url',
 		array(
-			'label' => __( 'Hero button URL', 'upaif' ),
+			'label' => 'Hero button URL',
 			'section' => 'upaif_header',
 			'type' => 'url',
 		)
@@ -746,7 +751,7 @@ function upaif_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'upaif_hero_text_align',
 		array(
-			'label' => __( 'Hero text alignment', 'upaif' ),
+			'label' => 'Hero text alignment',
 			'section' => 'upaif_header',
 			'type' => 'select',
 			'choices' => array(
