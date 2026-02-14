@@ -17,7 +17,7 @@
   --btn-transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   --btn-hover-lift: translateY(-2px);
   --btn-hover-scale: scale(1.04);
-  --btn-hover-shadow: 0 8px 24px rgba(155, 45, 48, 0.4);
+  --btn-hover-shadow: 0 8px 18px rgba(155, 45, 48, 0.4);
 }
 
 @keyframes fadeIn {
@@ -301,8 +301,8 @@ a {
 .upaif-icon-box:hover,
 .upaif-social__icon:hover {
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 10px 30px rgba(155, 45, 48, 0.5), inset 0 1px 4px rgba(255, 255, 255, 0.8);
-  filter: drop-shadow(0 8px 20px rgba(155, 45, 48, 0.55));
+  box-shadow: 0 8px 24px rgba(155, 45, 48, 0.45), inset 0 1px 4px rgba(255, 255, 255, 0.8);
+  filter: drop-shadow(0 6px 16px rgba(155, 45, 48, 0.5));
 }
 
 .upaif-icon-box svg,
