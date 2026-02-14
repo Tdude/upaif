@@ -3,7 +3,7 @@
  Text Domain: upaif
  Author: Tibor Berki
  Author URI: https://rugd.se
- Version: 0.2.15
+ Version: 0.2.16
 */
 
 :root {
@@ -12,6 +12,12 @@
   --accent-red: #9b2d30;
   --text-dark: #2d1e12;
   --text-light: #5c4033;
+  
+  /* Unified button hover */
+  --btn-transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  --btn-hover-lift: translateY(-2px);
+  --btn-hover-scale: scale(1.04);
+  --btn-hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes fadeIn {
@@ -254,14 +260,15 @@ a {
   padding: 12px 28px;
   border-radius: 50px;
   text-decoration: none;
-  transition: all 0.3s;
-  box-shadow: 0 10px 30px rgba(155, 45, 48, 0.35);
+  transition: var(--btn-transition);
+  box-shadow: 0 4px 12px rgba(155, 45, 48, 0.25);
 }
 
 .upaif-nav__cta a:hover {
-  background: #bc8587;
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(155, 45, 48, 0.5);
+  background: #7a2325;
+  color: #fff;
+  transform: var(--btn-hover-lift) var(--btn-hover-scale);
+  box-shadow: var(--btn-hover-shadow);
 }
 
 .upaif-nav__icons {
@@ -284,15 +291,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 20px rgba(155, 45, 48, 0.38), inset 0 1px 4px rgba(255, 255, 255, 0.7);
-  filter: drop-shadow(0 5px 14px rgba(155, 45, 48, 0.45));
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(155, 45, 48, 0.2);
+  transition: var(--btn-transition);
 }
 
 .upaif-icon-box:hover,
 .upaif-social__icon:hover {
-  transform: translateY(-4px) scale(1.06);
-  box-shadow: 0 12px 36px rgba(155, 45, 48, 0.55), inset 0 1px 4px rgba(255, 255, 255, 0.8);
+  transform: var(--btn-hover-lift) var(--btn-hover-scale);
+  box-shadow: var(--btn-hover-shadow);
 }
 
 .upaif-icon-box svg,
@@ -361,15 +367,16 @@ a {
   font-size: 1.1rem;
   text-decoration: none;
   border-radius: 50px;
-  box-shadow: 0 12px 36px rgba(155, 45, 48, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(155, 45, 48, 0.3);
+  transition: var(--btn-transition);
   text-shadow: none;
 }
 
 .upaif-hero__cta:hover {
-  background: #7f2427;
-  transform: translateY(-3px);
-  box-shadow: 0 18px 48px rgba(155, 45, 48, 0.5);
+  background: #7a2325;
+  color: #fff;
+  transform: var(--btn-hover-lift) var(--btn-hover-scale);
+  box-shadow: var(--btn-hover-shadow);
 }
 
 .upaif-main {
@@ -701,14 +708,15 @@ a {
   border-radius: 50px;
   text-decoration: none;
   margin-top: 2rem;
-  transition: all 0.3s;
-  box-shadow: 0 10px 30px rgba(155, 45, 48, 0.35);
+  transition: var(--btn-transition);
+  box-shadow: 0 4px 16px rgba(155, 45, 48, 0.25);
 }
 
 .upaif-btn:hover {
-  background: #7f2427;
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(155, 45, 48, 0.5);
+  background: #7a2325;
+  color: #fff;
+  transform: var(--btn-hover-lift) var(--btn-hover-scale);
+  box-shadow: var(--btn-hover-shadow);
 }
 
 .upaif-cta-diagonal {
