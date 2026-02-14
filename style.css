@@ -17,7 +17,7 @@
   --btn-transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   --btn-hover-lift: translateY(-2px);
   --btn-hover-scale: scale(1.04);
-  --btn-hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  --btn-hover-shadow: 0 8px 24px rgba(155, 45, 48, 0.4);
 }
 
 @keyframes fadeIn {
