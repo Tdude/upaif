@@ -267,8 +267,8 @@ a {
 .upaif-nav__cta a:hover {
   background: #7a2325;
   color: #fff;
-  transform: var(--btn-hover-lift) var(--btn-hover-scale);
-  box-shadow: var(--btn-hover-shadow);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(155, 45, 48, 0.4);
 }
 
 .upaif-nav__icons {
@@ -297,8 +297,8 @@ a {
 
 .upaif-icon-box:hover,
 .upaif-social__icon:hover {
-  transform: var(--btn-hover-lift) var(--btn-hover-scale);
-  box-shadow: var(--btn-hover-shadow);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(155, 45, 48, 0.4);
 }
 
 .upaif-icon-box svg,
@@ -375,8 +375,8 @@ a {
 .upaif-hero__cta:hover {
   background: #7a2325;
   color: #fff;
-  transform: var(--btn-hover-lift) var(--btn-hover-scale);
-  box-shadow: var(--btn-hover-shadow);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(155, 45, 48, 0.4);
 }
 
 .upaif-main {
@@ -715,8 +715,8 @@ a {
 .upaif-btn:hover {
   background: #7a2325;
   color: #fff;
-  transform: var(--btn-hover-lift) var(--btn-hover-scale);
-  box-shadow: var(--btn-hover-shadow);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(155, 45, 48, 0.4);
 }
 
 .upaif-cta-diagonal {
