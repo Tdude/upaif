@@ -81,24 +81,12 @@ a {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - var(--hero-slant-right, 0%)),
-    0 calc(100% - var(--hero-slant-left, 0%))
-  );
   opacity: 1;
 }
 
 .upaif-hero.upaif-hero--image-right .upaif-hero__bg {
   left: auto;
   right: 0;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - var(--hero-slant-right, 0%)),
-    0 calc(100% - var(--hero-slant-left, 0%))
-  );
 }
 
 .upaif-hero__overlay {
@@ -474,7 +462,6 @@ a {
   }
   .upaif-hero__bg {
     width: 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 88%);
   }
   .upaif-nav__icons {
     display: none;
