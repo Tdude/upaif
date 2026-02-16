@@ -657,7 +657,15 @@ a {
  }
  
  .wp-block-columns .wp-block-image figure {
-  margin: 0;
+  margin: 0 0 1.25rem;
+ }
+
+ .wp-block-columns .wp-block-image figure.alignleft {
+  margin-right: 2rem;
+ }
+
+ .wp-block-columns .wp-block-image figure.alignright {
+  margin-left: 2rem;
  }
  
  .wp-block-columns .wp-block-image img {
