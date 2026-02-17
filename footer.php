@@ -7,20 +7,20 @@
 					<div class="upaif-footer__left">
 						<?php
 						$upaif_cta_title = get_theme_mod( 'upaif_footer_cta_title', 'Intresserad av gruppevent?' );
+						$upaif_cta_button_text = trim( (string) get_theme_mod( 'upaif_footer_cta_button_text', '' ) );
 						$upaif_cta_url = trim( (string) get_theme_mod( 'upaif_footer_cta_url', '' ) );
 						$upaif_cta_words = explode( ' ', $upaif_cta_title, 2 );
 						$upaif_cta_first = $upaif_cta_words[0];
 						$upaif_cta_rest = isset( $upaif_cta_words[1] ) ? ' ' . $upaif_cta_words[1] : '';
 						?>
 						<h2 class="upaif-cta-title upaif-title--black-red">
-							<?php if ( $upaif_cta_url ) : ?>
-								<a href="<?php echo esc_url( $upaif_cta_url ); ?>" class="upaif-cta-title__link">
-							<?php endif; ?>
 							<span class="upaif-title__first"><?php echo esc_html( $upaif_cta_first ); ?></span><?php echo esc_html( $upaif_cta_rest ); ?>
-							<?php if ( $upaif_cta_url ) : ?>
-								</a>
-							<?php endif; ?>
 						</h2>
+						<?php if ( $upaif_cta_url && $upaif_cta_button_text ) : ?>
+							<p class="upaif-footer__cta">
+								<a class="upaif-hero__cta" href="<?php echo esc_url( $upaif_cta_url ); ?>"><?php echo esc_html( $upaif_cta_button_text ); ?></a>
+							</p>
+						<?php endif; ?>
 						<?php $upaif_footer_text = trim( (string) get_theme_mod( 'upaif_footer_text', '' ) ); ?>
 						<?php if ( $upaif_footer_text ) : ?>
 							<p class="upaif-footer__text"><?php echo nl2br( esc_html( $upaif_footer_text ) ); ?></p>

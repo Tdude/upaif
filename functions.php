@@ -795,6 +795,22 @@ function upaif_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'upaif_footer_cta_button_text',
+		array(
+			'default' => '',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'upaif_footer_cta_button_text',
+		array(
+			'label' => __( 'Footer CTA button text', 'upaif' ),
+			'section' => 'upaif_footer',
+			'type' => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
 		'upaif_footer_cta_url',
 		array(
 			'default' => '',
