@@ -44,6 +44,28 @@ body {
   overflow-x: hidden;
 }
 
+ .wp-block-post-content :is(ul, ol),
+ .entry-content :is(ul, ol) {
+  line-height: 2rem;
+ }
+
+ .wp-block-list,
+ .wp-block-post-content .wp-block-list,
+ .entry-content .wp-block-list {
+  line-height: 2rem;
+ }
+
+ .wp-block-list li,
+ .wp-block-post-content .wp-block-list li,
+ .entry-content .wp-block-list li {
+  line-height: 2rem;
+ }
+
+ .wp-block-post-content li,
+ .entry-content li {
+  line-height: 2rem;
+ }
+
 img {
   max-width: 100%;
   height: auto;
@@ -651,8 +673,13 @@ a {
   aspect-ratio: 3 / 4;
 }
 
- .wp-block-columns .wp-block-image {
+ .wp-block-columns {
   margin: 0;
+  padding: 2rem 0 3rem 0;
+ }
+
+ .wp-block-image {
+  margin: 0 2rem 0 0;
   padding: 0;
  }
  
